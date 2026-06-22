@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Firizqi Aditya Mulya | Portfolio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        /* Custom scroll behavior */
+        html { scroll-behavior: smooth; }
+        
+        /* Fade-in animation for hero and scroll trigger */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in-up { animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* Typography overrides for Material Symbols */
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        /* Underline animation for links */
+        .link-hover {
+            position: relative;
+            display: inline-block;
+        }
+        .link-hover::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background-color: #2D5016;
+            transition: width 0.3s ease;
+        }
+        .link-hover:hover::after {
+            width: 100%;
+        }
+    </style>
+<!-- Shared Tailwind Config -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-on-surface": "#f5f0e7",
+                    "on-primary-fixed-variant": "#2c4f15",
+                    "on-secondary": "#ffffff",
+                    "primary-fixed": "#c4efa3",
+                    "secondary-fixed-dim": "#d2c5b4",
+                    "on-tertiary": "#ffffff",
+                    "secondary": "#675d4f",
+                    "outline": "#73796c",
+                    "on-surface-variant": "#43493d",
+                    "surface": "#EAE4D9",
+                    "error": "#ba1a1a",
+                    "on-tertiary-fixed": "#3a0428",
+                    "surface-dim": "#ded9d1",
+                    "on-secondary-container": "#6b6153",
+                    "error-container": "#ffdad6",
+                    "background": "#fef9f0",
+                    "accent-hover": "#3D6B1F",
+                    "on-primary-fixed": "#0a2100",
+                    "on-error": "#ffffff",
+                    "on-secondary-fixed-variant": "#4e4539",
+                    "tertiary": "#551b3f",
+                    "primary-container": "#2d5016",
+                    "on-tertiary-fixed-variant": "#6f3155",
+                    "inverse-primary": "#a8d38a",
+                    "tertiary-fixed-dim": "#ffafd8",
+                    "surface-container": "#f2ede4",
+                    "on-secondary-fixed": "#211b10",
+                    "secondary-fixed": "#efe0cf",
+                    "primary-fixed-dim": "#a8d38a",
+                    "secondary-container": "#ecdecc",
+                    "on-tertiary-container": "#ee9ec8",
+                    "surface-variant": "#e7e2d9",
+                    "tertiary-container": "#703256",
+                    "on-primary-container": "#98c27b",
+                    "on-error-container": "#93000a",
+                    "primary": "#173901",
+                    "on-background": "#1d1c16",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-fixed": "#ffd8e9",
+                    "surface-container-low": "#f8f3ea",
+                    "on-surface": "#1d1c16",
+                    "surface-bright": "#fef9f0",
+                    "inverse-surface": "#32302a",
+                    "border": "#D6CEBC",
+                    "text-primary": "#1C1712",
+                    "surface-container-high": "#ece8df",
+                    "outline-variant": "#c3c9b9",
+                    "surface-tint": "#43682b",
+                    "surface-container-highest": "#e7e2d9",
+                    "on-primary": "#ffffff",
+                    "text-muted": "#A8998A"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sm": "16px",
+                    "gutter": "24px",
+                    "xs": "8px",
+                    "xl": "48px",
+                    "max-width": "1200px",
+                    "lg": "32px",
+                    "xxl": "64px",
+                    "base": "8px",
+                    "section-v": "192px",
+                    "md": "24px"
+            },
+            "fontFamily": {
+                    "label-lg": ["dmSans", "sans-serif"],
+                    "display-hero": ["Instrument Serif", "serif"],
+                    "headline-lg": ["dmSans", "sans-serif"],
+                    "metadata": ["dmSans", "sans-serif"],
+                    "headline-md-mobile": ["dmSans", "sans-serif"],
+                    "mono-label": ["JetBrains Mono", "monospace"],
+                    "body-md": ["dmSans", "sans-serif"],
+                    "headline-md": ["dmSans", "sans-serif"],
+                    "headline-lg-mobile": ["dmSans", "sans-serif"],
+                    "body-sm": ["dmSans", "sans-serif"]
+            },
+            "fontSize": {
+                    "label-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "500"}],
+                    "display-hero": ["96px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "400"}],
+                    "headline-lg": ["64px", {"lineHeight": "1.1", "fontWeight": "700"}],
+                    "metadata": ["13px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-md-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "mono-label": ["11px", {"lineHeight": "1.0", "letterSpacing": "0.04em", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "300"}],
+                    "headline-md": ["36px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["40px", {"lineHeight": "1.1", "fontWeight": "700"}],
+                    "body-sm": ["15px", {"lineHeight": "1.6", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-background text-on-surface selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 backdrop-blur-md bg-background/95 transition-all duration-300">
+<div class="flex justify-between items-center h-[64px] max-w-[1200px] mx-auto px-gutter md:px-xl">
+<a class="font-display-hero text-[24px] md:text-headline-md text-primary italic leading-none" href="#">Firizqi Aditya Mulya</a>
+<div class="hidden md:flex gap-xl items-center">
+<a class="font-label-lg text-label-lg text-secondary hover:text-primary transition-colors duration-200" href="#about">About</a>
+<a class="font-label-lg text-label-lg text-secondary hover:text-primary transition-colors duration-200" href="#projects">Projects</a>
+<a class="font-label-lg text-label-lg text-secondary hover:text-primary transition-colors duration-200" href="#contact">Contact</a>
+</div>
+<button class="md:hidden font-mono-label text-mono-label uppercase tracking-widest text-primary">Menu</button>
+</div>
+</nav>
+<main class="max-w-[1200px] mx-auto px-gutter md:px-xl">
+<!-- Hero Section -->
+<section class="pt-section-v pb-xl flex flex-col items-start opacity-0 fade-in-up" id="hero">
+<h1 class="font-display-hero text-headline-lg-mobile md:text-display-hero text-primary italic mb-sm">
+                Firizqi Aditya Mulya
+            </h1>
+<p class="font-body-md text-[20px] md:text-[28px] max-w-[700px] text-secondary-fixed-dim leading-relaxed mb-lg">
+                Builder. Informatika student at <span class="text-on-surface italic font-normal">Universitas Sebelas Maret.</span>
+</p>
+<a class="font-label-lg text-label-lg text-primary-container hover:text-accent-hover transition-all flex items-center gap-xs link-hover" href="#projects">
+                See my work <span class="font-normal text-[22px]">→</span>
+</a>
+</section>
+<!-- Projects Section -->
+<section class="pt-section-v pb-xl" id="projects">
+<div class="mb-xxl reveal">
+<span class="font-mono-label text-mono-label text-text-muted uppercase mb-xs block">WORK</span>
+<h2 class="font-headline-lg-mobile md:text-headline-lg text-text-primary">Projects</h2>
+</div>
+<!-- Bento Grid - Asymmetric -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-x-lg gap-y-xxl">
+<!-- Project 1: RoboBoat (Large) -->
+<article class="md:col-span-8 group reveal">
+<div class="overflow-hidden rounded-lg mb-md bg-surface">
+<img class="w-full aspect-[16/10] object-cover transition-transform duration-700 group-hover:scale-[1.02]" data-alt="A high-tech autonomous robotic boat navigating through calm water with visible electronic sensors and carbon fiber hull. The lighting is crisp morning sun, emphasizing professional engineering and hardware craftsmanship. The color palette is dominated by warm neutrals and deep forest green accents, reflecting a sophisticated industrial design aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwfFqd50_dwuIMIsyuBRbDBmsY4Cs1sushevfMihmMMinekAaLN28PHYAJEvrp-6IqGW_SKYZ6D1sj27kcSxGdVv4ffanZ2GXQRt-6enUjIne5Dj51zAiOs_pbVx5yRZR-ApP5s9iq22wZL6UArSFSiBjgHUd7WQPicGzu_wf4W7ps5q6gd6ZwLmOjpLJFD4oRC4eXwmkbGjw4iWRa1Oi6aCRuseWai-L0STCjXAqGKmj8wOWjL7-KtTqveuZ10gvxfMmcJJMtUVlM"/>
+</div>
+<span class="font-mono-label text-mono-label text-text-muted uppercase mb-xs block">Robotics</span>
+<h3 class="font-headline-md text-headline-md text-text-primary mb-xs">RoboBoat</h3>
+<p class="font-body-md text-secondary mb-sm">Autonomous vessel designed for marine exploration and environmental monitoring.</p>
+<div class="flex flex-wrap gap-sm">
+<span class="font-mono-label text-mono-label text-text-muted">C++</span>
+<span class="font-mono-label text-mono-label text-text-muted">ROS</span>
+<span class="font-mono-label text-mono-label text-text-muted">Hardware Design</span>
+</div>
+</article>
+<!-- Project 2: Automawhat? (Small) -->
+<article class="md:col-span-4 group reveal delay-1">
+<div class="overflow-hidden rounded-lg mb-md bg-surface">
+<img class="w-full aspect-[16/10] object-cover transition-transform duration-700 group-hover:scale-[1.02]" data-alt="A clean, minimalist web application interface displaying complex automation workflows and logic trees. The UI features soft cream backgrounds, sharp dark typography, and forest green UI elements. It captures a sense of intentionality and quiet power, showcasing modern web software engineering in a professional light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIcT9HvmZG1O4ALbceVwpLSKg8DJPmJsJOzRCRSRWV837YKjF3DXYqmjsbEswnv5LTcKiLmRaWNsR1j5S2EQk6G1-uIofeQzU2uP6NgWSLwZOYnNgA5utCxbhI8A-su2L-WvTn4Gzl9sPYdhrBZ4LehPrxJPUgOY6AZH9jfOA1BomkNEuLEgQPz9HW530PryYoAeOwVXER8NIUX40ET93qzpgMa5ioqLJwly9QjacseFY1qWW__O3uSnhvx49dpkgIPXw-WSRadxWM"/>
+</div>
+<span class="font-mono-label text-mono-label text-text-muted uppercase mb-xs block">Web Tool</span>
+<h3 class="font-headline-md text-headline-md text-text-primary mb-xs">Automawhat?</h3>
+<p class="font-body-md text-secondary mb-sm">Workflow visualizer and logic debugger for developer pipelines.</p>
+<div class="flex flex-wrap gap-sm">
+<span class="font-mono-label text-mono-label text-text-muted">Next.js</span>
+<span class="font-mono-label text-mono-label text-text-muted">TypeScript</span>
+</div>
+</article>
+<!-- Project 3: HaloMBG (Small) -->
+<article class="md:col-span-4 group reveal">
+<div class="overflow-hidden rounded-lg mb-md bg-surface">
+<img class="w-full aspect-[16/10] object-cover transition-transform duration-700 group-hover:scale-[1.02]" data-alt="A modern mobile application interface showing health or educational metrics on a sleek smartphone frame. The layout is spacious with large serif headings and subtle forest green indicators. The background is a soft, warm ivory. The overall mood is approachable, professional, and grounded in purposeful user experience design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3mScnaOJ2MF6o_uWbZ-rkce_Vl2ekssLnDJecHTPW0ir5AW8r-IurG_rdo8ujuDrWVXp1b9DggDSC1bcAKt99hPuC1ZGSP-8TaFzD3hD9x2wcBpKYlKSNF4vL2tQNHrr4pi-X1JXOvttkH7LOGrA0UOBjZvznAkeaXHUs3rVEX37hAmBSQ1RUl9oTEPs77LMUK8m-83PzJa1X7vwkQs2ZSaOn21P5FjKfGm8m4KM5qNeYgsx45eMFYsGt9a2BFOLIp69nwzzqZger"/>
+</div>
+<span class="font-mono-label text-mono-label text-text-muted uppercase mb-xs block">Mobile App</span>
+<h3 class="font-headline-md text-headline-md text-text-primary mb-xs">HaloMBG</h3>
+<p class="font-body-md text-secondary mb-sm">Community engagement platform for regional student empowerment.</p>
+<div class="flex flex-wrap gap-sm">
+<span class="font-mono-label text-mono-label text-text-muted">Flutter</span>
+<span class="font-mono-label text-mono-label text-text-muted">Firebase</span>
+</div>
+</article>
+<!-- Project 4: Stroke Prediction ML (Large) -->
+<article class="md:col-span-8 group reveal delay-1">
+<div class="overflow-hidden rounded-lg mb-md bg-surface">
+<img class="w-full aspect-[16/10] object-cover transition-transform duration-700 group-hover:scale-[1.02]" data-alt="Abstract data visualization showing medical patterns and probability heatmaps in a sophisticated dark forest green and cream palette. The composition is clean and technical, suggesting high-precision machine learning and healthcare analytics. The atmosphere is serious and intentional, representing life-saving software engineering." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqTCIbjkLDxzCY9fx4UDxEUQzQluiuiHBO3Jy20sERtAFvUjSq5DDc2dxrWjLRB13BQ4cBiA1dIRlIUT4OMg8aYzKmMEVUdNnlfrKD6AmV3S3LtT3DDomUqO3bP-3sztd-wTU89l542m2DQVvacjz1s3qyfAnvaoFZDNK7t3LFc3oiP60LZvJtsZbaPslut6zQNIeERHAHFRBTtkgJ-ilK4werTeM21PQ03FKXIaGGoRR35upsS6mft1ITkDUKChvoQ8ZvkvfGea1k"/>
+</div>
+<span class="font-mono-label text-mono-label text-text-muted uppercase mb-xs block">Machine Learning</span>
+<h3 class="font-headline-md text-headline-md text-text-primary mb-xs">Stroke Prediction ML</h3>
+<p class="font-body-md text-secondary mb-sm">Predictive model utilizing clinical data to identify high-risk patients early.</p>
+<div class="flex flex-wrap gap-sm">
+<span class="font-mono-label text-mono-label text-text-muted">Python</span>
+<span class="font-mono-label text-mono-label text-text-muted">TensorFlow</span>
+<span class="font-mono-label text-mono-label text-text-muted">Scikit-Learn</span>
+</div>
+</article>
+<!-- Project 5: LectInfor (Medium) -->
+<article class="md:col-span-6 group reveal">
+<div class="overflow-hidden rounded-lg mb-md bg-surface">
+<img class="w-full aspect-[16/10] object-cover transition-transform duration-700 group-hover:scale-[1.02]" data-alt="A smartphone screen displaying an academic schedule and faculty directory for a computer science department. The design is utilitarian yet elegant, with warm cream tones and dark olive green accents. It emphasizes information hierarchy and ease of use for students. The style is modern, industrial, and quiet." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBk_4zKFkQbD6IBxQoM3gc4WDc68Gbef5KhxMDj8jHJ4lyEUpVNOOcNI8Uw2LmgLitHTanARgohQQQ2KOa66L01vxGIrKlAeFkzZVv4QaSpm_Lk6VPcPtBjmiU3KRxt6M7Cf3bYWTX8IXLTeJ54isFgiXK34WB__sY7Us448NfLLXxqjMemW88OslVmcQ7tAFuSN6XOEDsGu6RJMTuhHtCyUE0-SNjZ_ayg1eSjzDWuxXU38DCyUz6JhCaDyZf4KYNXnNcV4dp0gCON"/>
+</div>
+<span class="font-mono-label text-mono-label text-text-muted uppercase mb-xs block">Android App</span>
+<h3 class="font-headline-md text-headline-md text-text-primary mb-xs">LectInfor</h3>
+<p class="font-body-md text-secondary mb-sm">Centralized academic portal for informatics department students.</p>
+<div class="flex flex-wrap gap-sm">
+<span class="font-mono-label text-mono-label text-text-muted">Kotlin</span>
+<span class="font-mono-label text-mono-label text-text-muted">Retrofit</span>
+</div>
+</article>
+<!-- Project 6: Bengawan UV Website (Medium) -->
+<article class="md:col-span-6 group reveal delay-1">
+<div class="overflow-hidden rounded-lg mb-md bg-surface">
+<img class="w-full aspect-[16/10] object-cover transition-transform duration-700 group-hover:scale-[1.02]" data-alt="A professional organizational website for a robotics team, showcasing research papers, team members, and high-resolution photos of unmanned vehicles. The web design features a sophisticated editorial layout with wide margins, bold serif titles, and a calming warm cream background. The tone is authoritative and academic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbcTmEHw_Z1R6ExwNG8kx_Cpu7XcBS4qPzRcSG4guKM6LIcOvuZ7llNrRKmtZL0N3RvD43UR6bowpfvQfXHoweZEvswpVOEJqgX2e7m5uSHsWHKw2c4kSK8_cxWRch-vocHmYoiLqgGZpN7RlLAqpSJt4QxJn01qPZA2u4Juri6WyeeyhXx-KpPTD-e91W0nkE3mw0l1XuqK_CdbLYr3cHeq-Qe_vsDIAHRxu6HyWBICfeCghjojHWfimvsVPmau6KzR5_LDC4p7Zg"/>
+</div>
+<span class="font-mono-label text-mono-label text-text-muted uppercase mb-xs block">Web</span>
+<h3 class="font-headline-md text-headline-md text-text-primary mb-xs">Bengawan UV Website</h3>
+<p class="font-body-md text-secondary mb-sm">Official digital presence for the Bengawan Unmanned Vehicle Team.</p>
+<div class="flex flex-wrap gap-sm">
+<span class="font-mono-label text-mono-label text-text-muted">React</span>
+<span class="font-mono-label text-mono-label text-text-muted">Tailwind CSS</span>
+</div>
+</article>
+</div>
+</section>
+<!-- About Section -->
+<section class="pt-section-v pb-xl" id="about">
+<div class="max-w-[1000px] mx-auto reveal">
+<span class="font-mono-label text-mono-label text-text-muted uppercase mb-xs block">ABOUT</span>
+<h2 class="font-headline-lg-mobile md:text-headline-lg text-text-primary mb-lg leading-tight">Intentionality over domain.</h2>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-xl"><div class="md:col-span-5">
+<p class="font-body-md text-[18px] md:text-[22px] text-secondary leading-relaxed mb-md">
+                            I am a builder who codes and designs across robotics, mobile, and web. Currently pursuing Informatika at Universitas Sebelas Maret, I believe that great engineering isn't just about the code—it's about the purpose and physical nature of the solution.
+                        </p>
+<p class="font-body-md text-[18px] md:text-[22px] text-secondary leading-relaxed">
+                            Whether I'm debugging a ROS node for an autonomous boat or refining the padding of a React component, my goal is to create systems that feel grounded, reliable, and expertly crafted.
+                        </p>
+</div>
+<div class="md:col-span-4">
+<div class="overflow-hidden rounded-lg bg-surface aspect-[3/4]">
+<img alt="Personal photo of Firizqi Aditya Mulya" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+</div>
+<div class="md:col-span-3 flex flex-col gap-md">
+<div>
+<span class="font-mono-label text-mono-label text-text-muted uppercase block mb-xs">Specialization</span>
+<p class="font-body-sm text-text-primary">Software Architecture, Embedded Systems, UI/UX Design</p>
+</div>
+<div>
+<span class="font-mono-label text-mono-label text-text-muted uppercase block mb-xs">Location</span>
+<p class="font-body-sm text-text-primary" data-location="Surakarta, Indonesia">Surakarta, ID</p>
+</div>
+</div></div>
+</div>
+</section>
+<!-- Contact Section -->
+<section class="pt-section-v pb-section-v" id="contact">
+<div class="reveal">
+<span class="font-mono-label text-mono-label text-text-muted uppercase mb-xs block">CONNECT</span>
+<h2 class="font-headline-lg-mobile md:text-headline-lg text-text-primary mb-xl">Let's build something.</h2>
+<div class="flex flex-col md:flex-row gap-xl">
+<a class="group" href="mailto:hello@firizqi.dev">
+<span class="font-mono-label text-mono-label text-text-muted uppercase block mb-xs">Email</span>
+<span class="font-label-lg text-headline-md text-primary-container link-hover">hello@firizqi.dev</span>
+</a>
+<a class="group" href="#">
+<span class="font-mono-label text-mono-label text-text-muted uppercase block mb-xs">LinkedIn</span>
+<span class="font-label-lg text-headline-md text-primary-container link-hover">Firizqi Aditya Mulya</span>
+</a>
+<a class="group" href="#">
+<span class="font-mono-label text-mono-label text-text-muted uppercase block mb-xs">GitHub</span>
+<span class="font-label-lg text-headline-md text-primary-container link-hover">@firizqi</span>
+</a>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-background border-t border-border">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center max-w-[1200px] mx-auto px-gutter md:px-xl py-xl">
+<div class="mb-lg md:mb-0">
+<p class="font-mono-label text-mono-label text-on-surface uppercase tracking-widest mb-xs">FIRIZQI ADITYA MULYA</p>
+<p class="font-metadata text-metadata text-secondary">© 2024 Firizqi Aditya Mulya. Built with intention.</p>
+</div>
+<div class="flex gap-lg">
+<a class="font-metadata text-metadata text-secondary hover:text-primary transition-colors duration-200" href="#about">About</a>
+<a class="font-metadata text-metadata text-secondary hover:text-primary transition-colors duration-200" href="#projects">Projects</a>
+<a class="font-metadata text-metadata text-secondary hover:text-primary transition-colors duration-200" href="#contact">Contact</a>
+</div>
+</div>
+</footer>
+<script>
+        // Simple Intersection Observer for scroll reveal animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Nav scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-sm');
+                nav.classList.remove('bg-background/95');
+                nav.classList.add('bg-background/98');
+            } else {
+                nav.classList.remove('shadow-sm');
+                nav.classList.add('bg-background/95');
+            }
+        });
+    </script>
+</body></html>
