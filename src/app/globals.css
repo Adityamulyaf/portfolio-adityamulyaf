@@ -1,26 +1,86 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-background: #FAEAD0; /* warm pale peach */
+  --color-on-surface: #1C2E46; /* deep dark blue */
+  --color-primary: #1C2E46; /* deep dark blue */
+  --color-on-primary: #ffffff;
+  --color-primary-container: #2B4E72; /* dark slate blue accent */
+  --color-on-primary-container: #A8C6E2; /* light sky blue */
+  --color-secondary: #5B6777; /* muted slate blue */
+  --color-on-secondary: #ffffff;
+  --color-surface: #E2E6EF; /* soft cool ice blue */
+  --color-border: #E5E3D7; /* warm grey-beige */
+  --color-text-primary: #1C2E46; /* deep dark blue */
+  --color-text-muted: #5B6777;
+  --color-accent-hover: #436F9B; /* medium-light ocean blue */
+  --color-secondary-fixed-dim: #5B6777;
+  
+  --font-display-hero: var(--font-instrument-serif), Georgia, serif;
+  --font-body-md: var(--font-dm-sans), system-ui, sans-serif;
+  --font-body-sm: var(--font-dm-sans), system-ui, sans-serif;
+  --font-label-lg: var(--font-dm-sans), system-ui, sans-serif;
+  --font-headline-lg-mobile: var(--font-dm-sans), system-ui, sans-serif;
+  --font-headline-lg: var(--font-dm-sans), system-ui, sans-serif;
+  --font-headline-md: var(--font-dm-sans), system-ui, sans-serif;
+  --font-mono-label: var(--font-jetbrains-mono), monospace;
+  --font-metadata: var(--font-dm-sans), system-ui, sans-serif;
+  
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-card: 8px;
+  
+  --spacing-gutter: 24px;
+  --spacing-section-v: 192px;
+  --spacing-sm: 16px;
+  --spacing-xs: 8px;
+  --spacing-lg: 32px;
+  --spacing-xxl: 64px;
+  --spacing-xl: 48px;
+  --spacing-base: 8px;
+  --spacing-md: 24px;
+  --spacing-max-width: 1200px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Custom micro-animations & transitions */
+.link-hover {
+  position: relative;
+  display: inline-block;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+.link-hover::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 1px;
+  bottom: -2px;
+  left: 0;
+  background-color: var(--color-primary-container);
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.link-hover:hover::after {
+  width: 100%;
+}
+
+/* Custom Typography Utilities */
+.text-hero {
+  font-size: clamp(38px, 9vw, 56px);
+}
+@media (min-width: 768px) {
+  .text-hero {
+    font-size: clamp(56px, 8vw, 96px);
   }
 }
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.text-headline-lg {
+  font-size: clamp(40px, 5vw, 64px);
+}
+.text-headline-lg-mobile {
+  font-size: clamp(30px, 8vw, 40px);
+}
+.text-headline-md {
+  font-size: clamp(24px, 3vw, 36px);
+}
+.text-headline-md-mobile {
+  font-size: clamp(20px, 6vw, 24px);
 }

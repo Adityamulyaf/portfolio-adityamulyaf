@@ -1,65 +1,102 @@
+"use client";
+
+import { useState, useEffect, useRef } from "react";
+import Navbar from "@/components/Navbar";
+import Hero from "@/components/Hero";
+import Projects from "@/components/Projects";
+import About from "@/components/About";
+import Contact from "@/components/Contact";
+import Footer from "@/components/Footer";
+import ProjectDetails from "@/components/ProjectDetails";
+import { Project } from "@/data/projects";
 import Image from "next/image";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 export default function Home() {
+  const [activeSpecialization, setActiveSpecialization] = useState<string | null>(null);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const flowerRef = useRef<HTMLDivElement>(null);
+
+  const handleClearFilter = () => {
+    setActiveSpecialization(null);
+  };
+
+  // Note: ESC key handling is managed inside ProjectDetails
+  // to allow the close animation to complete before clearing state.
+
+  useEffect(() => {
+    if (flowerRef.current) {
+      ScrollTrigger.getAll().forEach((trigger) => {
+        if (trigger.trigger === flowerRef.current) {
+          trigger.kill();
+        }
+      });
+
+      gsap.fromTo(
+        flowerRef.current,
+        { y: 0 },
+        {
+          y: 50,
+          ease: "none",
+          scrollTrigger: {
+            trigger: flowerRef.current,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+          },
+        }
+      );
+    }
+  }, []);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <>
+      <Navbar />
+
+      {/* Hero and Flower Divider: Absolute at bottom on mobile, normal flow on desktop */}
+      <div className="relative w-full min-h-[100vh] md:min-h-none flex flex-col justify-center md:justify-start md:block">
+        <header className="max-w-max-width mx-auto px-gutter md:px-xl w-full pt-[80px] md:pt-[120px] z-10 -translate-y-[8vh] md:translate-y-0">
+          <Hero />
+        </header>
+
+        {/* Flower Divider */}
+        <div ref={flowerRef} className="w-full overflow-hidden leading-[0] pointer-events-none z-0 absolute bottom-[-60px] left-0 md:relative md:bottom-auto md:left-auto md:mt-[-70px]">
+          <Image
+            src="/flower-line.png"
+            alt="Flower Divider"
+            width={2400}
+            height={785}
+            className="w-full h-auto min-h-[320px] md:min-h-none object-cover object-bottom"
+            priority
+          />
+        </div>
+      </div>
+
+      {/* Main container for standard sections */}
+      <main className="max-w-max-width mx-auto px-gutter md:px-xl flex-1 flex flex-col">
+        <Projects
+          activeSpecialization={activeSpecialization}
+          onSelectProject={setSelectedProject}
+          onClearFilter={handleClearFilter}
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+        <About
+          activeSpecialization={activeSpecialization}
+          onSelectSpecialization={setActiveSpecialization}
+        />
+        <Contact />
       </main>
-    </div>
+      <Footer />
+
+      {/* Project Details — Ancient Scroll Overlay */}
+      <ProjectDetails
+        project={selectedProject}
+        onClose={() => setSelectedProject(null)}
+      />
+    </>
   );
 }
