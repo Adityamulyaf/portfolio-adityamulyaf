@@ -37,23 +37,24 @@ export default function MagicCircleIntro({ onComplete }: MagicCircleIntroProps) 
       }
     });
 
-    // 1. Fade out tombol "Zoltraak"
+    // 1. Fade out tombol "Zoltraak" (mulai detik 0)
     tl.to(buttonRef.current, { 
       opacity: 0, 
       scale: 0.8, 
-      duration: 0.4, 
+      duration: 0.3, 
       ease: "power2.in", 
       display: "none" 
-    });
+    }, 0);
 
-    // 2. Fade & Scale In lingkaran sihir
+    // 2. Fade & Scale In lingkaran sihir (mulai detik 0.2, selesai detik 1.1)
     tl.fromTo(
       circleWrapperRef.current, 
-      { opacity: 0, scale: 0.7 }, 
-      { opacity: 1, scale: 1, duration: 1.5, ease: "power3.out" }
+      { opacity: 0, scale: 0.6 }, 
+      { opacity: 1, scale: 1, duration: 0.9, ease: "power3.out" },
+      0.2
     );
 
-    // 3. Jeda, lalu trigger Flash
+    // 3. Trigger Flash (mulai detik 1.32, selesai detik 1.5 untuk menyesuaikan sound effect)
     tl.to(
       flashOverlayRef.current,
       { 
@@ -61,35 +62,36 @@ export default function MagicCircleIntro({ onComplete }: MagicCircleIntroProps) 
         duration: 0.18, 
         ease: "power2.in"
       },
-      "+=1.8" // Jeda waktu melihat lingkaran berputar sebelum meledak
+      1.32
     );
 
-    // 4. Sembunyikan lingkaran sihir saat tertutup warna putih terang
-    tl.set(circleWrapperRef.current, { display: "none" });
+    // 4. Sembunyikan lingkaran sihir saat layar putih (tepat detik 1.5)
+    tl.set(circleWrapperRef.current, { display: "none" }, 1.5);
 
-    // 5. Redupkan Flash + Trigger Gelombang Kejut (Shockwave) + Memudarkan kontainer utama
+    // 5. Redupkan Flash + Trigger Gelombang Kejut (Shockwave) + Memudarkan kontainer utama (mulai detik 1.5)
     tl.to(
       flashOverlayRef.current,
       { 
         opacity: 0, 
-        duration: 0.8, 
+        duration: 0.7, 
         ease: "power2.out" 
-      }
+      },
+      1.5
     );
     tl.to(
       containerRef.current,
       { 
         opacity: 0, 
-        duration: 0.8, 
+        duration: 0.7, 
         ease: "power2.out" 
       },
-      "<" // Mulai bersamaan dengan memudarnya flash
+      1.5
     );
     tl.fromTo(
       shockwaveRef.current,
       { scale: 0.1, opacity: 0.9 },
-      { scale: 5, opacity: 0, duration: 1.1, ease: "power3.out" },
-      "<"
+      { scale: 5, opacity: 0, duration: 1.0, ease: "power3.out" },
+      1.5
     );
   };
 
@@ -172,7 +174,7 @@ export default function MagicCircleIntro({ onComplete }: MagicCircleIntroProps) 
           }
         }
         .animate-rotate {
-          animation: rotateInfinite 1s linear infinite;
+          animation: rotateInfinite 15s linear infinite;
         }
         @keyframes rotateInfinite {
           from { transform: rotate(0deg); }
