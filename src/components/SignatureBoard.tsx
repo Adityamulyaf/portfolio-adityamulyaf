@@ -128,16 +128,23 @@ export default function SignatureBoard() {
     return canvas.toDataURL();
   }
 
-  // Handle modal animation when opened
+  // Handle modal animation and body scrolling when opened
   useEffect(() => {
     if (isModalOpen && modalRef.current) {
+      document.body.style.overflow = "hidden";
       gsap.fromTo(
         modalRef.current,
         { opacity: 0, scale: 0.95, y: 10 },
         { opacity: 1, scale: 1, y: 0, duration: 0.3, ease: "power3.out" }
       );
       initCanvas();
+    } else {
+      document.body.style.overflow = "";
     }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [isModalOpen]);
 
   function initCanvas() {
@@ -377,7 +384,7 @@ export default function SignatureBoard() {
                   onTouchStart={handleTouchStart}
                   onTouchMove={handleTouchMove}
                   onTouchEnd={stopDrawing}
-                  className="absolute inset-0 w-full h-full"
+                  className="absolute inset-0 w-full h-full touch-none"
                 />
               </div>
             </div>
