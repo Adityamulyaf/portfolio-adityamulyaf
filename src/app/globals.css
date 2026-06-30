@@ -59,7 +59,8 @@
   transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.link-hover:hover::after {
+.link-hover:hover::after,
+.link-hover.link-active::after {
   width: 100%;
 }
 

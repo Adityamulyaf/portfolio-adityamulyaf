@@ -6,16 +6,39 @@ import Image from "next/image";
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState<string>("");
 
   useEffect(() => {
     const handleScroll = () => {
+      // 1. Tentukan status scrolled untuk border navbar
       if (window.scrollY > 80) {
         setIsScrolled(true);
       } else {
         setIsScrolled(false);
       }
+
+      // 2. Scroll Spy: Tentukan section yang aktif secara dinamis
+      const sections = ["about", "projects", "contact"];
+      const triggerPoint = 200; // 200px dari atas viewport
+      let currentSection = "";
+
+      for (const sectionId of sections) {
+        const el = document.getElementById(sectionId);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= triggerPoint && rect.bottom > triggerPoint) {
+            currentSection = sectionId;
+            break;
+          }
+        }
+      }
+      setActiveSection(currentSection);
     };
+
     window.addEventListener("scroll", handleScroll);
+    // Jalankan sekali saat mount untuk mendeteksi posisi awal
+    handleScroll();
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -52,19 +75,31 @@ export default function Navbar() {
           <div className="hidden md:flex items-center gap-xl">
             <a
               href="#about"
-              className="font-body-md text-[15px] font-normal text-secondary hover:text-primary transition-colors duration-200"
+              className={`font-body-md text-[15px] transition-all duration-200 link-hover ${
+                activeSection === "about"
+                  ? "text-primary font-medium link-active"
+                  : "text-secondary font-normal hover:text-primary"
+              }`}
             >
               About
             </a>
             <a
               href="#projects"
-              className="font-body-md text-[15px] font-normal text-secondary hover:text-primary transition-colors duration-200"
+              className={`font-body-md text-[15px] transition-all duration-200 link-hover ${
+                activeSection === "projects"
+                  ? "text-primary font-medium link-active"
+                  : "text-secondary font-normal hover:text-primary"
+              }`}
             >
               Projects
             </a>
             <a
               href="#contact"
-              className="font-body-md text-[15px] font-normal text-secondary hover:text-primary transition-colors duration-200"
+              className={`font-body-md text-[15px] transition-all duration-200 link-hover ${
+                activeSection === "contact"
+                  ? "text-primary font-medium link-active"
+                  : "text-secondary font-normal hover:text-primary"
+              }`}
             >
               Contact
             </a>
@@ -92,21 +127,27 @@ export default function Navbar() {
           <a
             href="#about"
             onClick={toggleMobileMenu}
-            className="font-display-hero text-[48px] text-secondary hover:text-primary italic transition-colors"
+            className={`font-display-hero text-[48px] italic transition-colors ${
+              activeSection === "about" ? "text-primary font-medium" : "text-secondary hover:text-primary"
+            }`}
           >
             About
           </a>
           <a
             href="#projects"
             onClick={toggleMobileMenu}
-            className="font-display-hero text-[48px] text-secondary hover:text-primary italic transition-colors"
+            className={`font-display-hero text-[48px] italic transition-colors ${
+              activeSection === "projects" ? "text-primary font-medium" : "text-secondary hover:text-primary"
+            }`}
           >
             Projects
           </a>
           <a
             href="#contact"
             onClick={toggleMobileMenu}
-            className="font-display-hero text-[48px] text-secondary hover:text-primary italic transition-colors"
+            className={`font-display-hero text-[48px] italic transition-colors ${
+              activeSection === "contact" ? "text-primary font-medium" : "text-secondary hover:text-primary"
+            }`}
           >
             Contact
           </a>
