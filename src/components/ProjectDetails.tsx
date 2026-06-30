@@ -84,15 +84,6 @@ export default function ProjectDetails({ project, onClose }: ProjectDetailsProps
     };
   }, [project]);
 
-  // --- Keyboard ESC close ---
-  useEffect(() => {
-    const handleKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") handleClose();
-    };
-    window.addEventListener("keydown", handleKey);
-    return () => window.removeEventListener("keydown", handleKey);
-  });
-
   const handleClose = () => {
     if (isClosingRef.current) return;
     isClosingRef.current = true;
@@ -143,6 +134,16 @@ export default function ProjectDetails({ project, onClose }: ProjectDetailsProps
     // Backdrop fades after scroll has mostly collapsed
     tl.to(backdropRef.current, { opacity: 0, duration: 0.3 }, "<0.3");
   };
+
+  // --- Keyboard ESC close ---
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") handleClose();
+    };
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div

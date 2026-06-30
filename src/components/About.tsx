@@ -70,11 +70,11 @@ export default function About({
             <p className="font-body-md text-[18px] md:text-[22px] text-secondary-fixed-dim leading-relaxed">
               I am a builder who codes and designs across robotics, mobile, and
               web. Currently pursuing Informatika at Universitas Sebelas Maret,
-              I believe that great engineering isn't just about the code—it's
+              I believe that great engineering isn&apos;t just about the code—it&apos;s
               about the purpose and physical nature of the solution.
             </p>
             <p className="font-body-md text-[18px] md:text-[22px] text-secondary-fixed-dim leading-relaxed">
-              Whether I'm debugging a ROS node for an autonomous boat or
+              Whether I&apos;m debugging a ROS node for an autonomous boat or
               refining the padding of a React component, my goal is to create
               systems that feel grounded, reliable, and expertly crafted.
             </p>

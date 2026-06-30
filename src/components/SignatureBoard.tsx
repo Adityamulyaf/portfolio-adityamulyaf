@@ -62,9 +62,10 @@ export default function SignatureBoard() {
       console.log("Firebase not configured. Running Guestbook in local offline mode (localStorage).");
       loadFromLocalStorage();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const loadFromLocalStorage = () => {
+  function loadFromLocalStorage() {
     const saved = localStorage.getItem("carved_statues");
     if (saved) {
       try {
@@ -77,9 +78,9 @@ export default function SignatureBoard() {
       setSignatures(defaults);
       localStorage.setItem("carved_statues", JSON.stringify(defaults));
     }
-  };
+  }
 
-  const getMockDefaults = (): Signature[] => {
+  function getMockDefaults(): Signature[] {
     return [
       {
         id: "ada",
@@ -94,7 +95,7 @@ export default function SignatureBoard() {
         date: "23 Jun 1912",
       },
     ];
-  };
+  }
 
   // Programmatically draw a mock signature on load
   function createMockSignature(text: string): string {
@@ -139,7 +140,7 @@ export default function SignatureBoard() {
     }
   }, [isModalOpen]);
 
-  const initCanvas = () => {
+  function initCanvas() {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
@@ -157,7 +158,7 @@ export default function SignatureBoard() {
     ctx.lineWidth = 2.5;
     ctx.lineCap = "round";
     ctx.lineJoin = "round";
-  };
+  }
 
   // Drawing pad handlers
   const startDrawing = (x: number, y: number) => {

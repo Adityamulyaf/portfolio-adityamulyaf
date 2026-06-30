@@ -90,7 +90,7 @@ export default function Hero() {
       <div ref={containerRef} className="w-full max-w-[800px] text-left flex flex-col items-start">
         {/* Nameplate */}
         <h1 className="gsap-hero-item opacity-0 font-display-hero text-hero text-text-primary italic tracking-tight font-normal leading-none mb-sm">
-          Hi, I'm Ditya!
+          Hi, I&apos;m Ditya!
         </h1>
 
         {/* Descriptor */}

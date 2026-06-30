@@ -12,12 +12,15 @@ import { Project } from "@/data/projects";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import MagicCircleIntro from "@/components/MagicCircleIntro";
+import { AnimatePresence } from "framer-motion";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
 export default function Home() {
+  const [showIntro, setShowIntro] = useState(true);
   const [activeSpecialization, setActiveSpecialization] = useState<string | null>(null);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const flowerRef = useRef<HTMLDivElement>(null);
@@ -28,6 +31,20 @@ export default function Home() {
 
   // Note: ESC key handling is managed inside ProjectDetails
   // to allow the close animation to complete before clearing state.
+
+  useEffect(() => {
+    // Mengecek apakah user sudah berkunjung di sesi browser ini
+    if (typeof window !== "undefined") {
+      const hasVisited = sessionStorage.getItem("intro_visited");
+      if (hasVisited === "true") {
+        setTimeout(() => {
+          setShowIntro(false);
+        }, 0);
+      } else {
+        sessionStorage.setItem("intro_visited", "true");
+      }
+    }
+  }, []);
 
   useEffect(() => {
     if (flowerRef.current) {
@@ -56,6 +73,12 @@ export default function Home() {
 
   return (
     <>
+      <AnimatePresence>
+        {showIntro && (
+          <MagicCircleIntro onComplete={() => setShowIntro(false)} />
+        )}
+      </AnimatePresence>
+
       <Navbar />
 
       {/* Hero and Flower Divider: Absolute at bottom on mobile, normal flow on desktop */}

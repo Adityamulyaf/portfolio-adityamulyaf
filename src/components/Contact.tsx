@@ -91,7 +91,7 @@ export default function Contact() {
               CONNECT
             </span>
             <h2 className="font-body-md text-headline-lg-mobile md:text-headline-lg font-bold text-text-primary mb-xl leading-none">
-              Let's build something.
+              Let&apos;s build something.
             </h2>
           </div>
 
