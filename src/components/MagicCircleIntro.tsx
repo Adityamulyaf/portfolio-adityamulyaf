@@ -12,118 +12,11 @@ export default function MagicCircleIntro({ onComplete }: MagicCircleIntroProps) 
   const containerRef = useRef<HTMLDivElement>(null);
   const circleWrapperRef = useRef<HTMLDivElement>(null);
   const flashOverlayRef = useRef<HTMLDivElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
   const shockwaveRef = useRef<HTMLDivElement>(null);
-  const particleLoopRef = useRef<number | null>(null);
 
   useEffect(() => {
     // Sembunyikan scrollbar pada body saat intro berlangsung
     document.body.style.overflow = "hidden";
-
-    // Setup Canvas Particles
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-    resizeCanvas();
-    window.addEventListener("resize", resizeCanvas);
-
-    interface Particle {
-      x: number;
-      y: number;
-      size: number;
-      speedX: number;
-      speedY: number;
-      opacity: number;
-      decay: number;
-      color: string;
-    }
-
-    const particles: Particle[] = [];
-
-    // Membuat partikel terapung di sekitar lingkaran sihir
-    const createFloatingParticle = (): Particle => {
-      const centerX = canvas.width / 2;
-      const centerY = canvas.height / 2;
-      const angle = Math.random() * Math.PI * 2;
-      const distance = Math.random() * 100 + 40;
-      return {
-        x: centerX + Math.cos(angle) * distance,
-        y: centerY + Math.sin(angle) * distance,
-        size: Math.random() * 2 + 0.5,
-        speedX: (Math.random() - 0.5) * 0.4,
-        speedY: -Math.random() * 0.5 - 0.1, // Bergerak ke atas perlahan
-        opacity: Math.random() * 0.4 + 0.2,
-        decay: Math.random() * 0.004 + 0.001,
-        color: "43, 78, 114" // Slate blue
-      };
-    };
-
-    // Animasi Loop Partikel
-    const animateParticles = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      // Tambahkan partikel secara periodik
-      if (particles.length < 35 && Math.random() < 0.1) {
-        particles.push(createFloatingParticle());
-      }
-
-      particles.forEach((p, idx) => {
-        p.x += p.speedX;
-        p.y += p.speedY;
-        p.opacity -= p.decay;
-
-        if (p.opacity <= 0) {
-          particles.splice(idx, 1);
-        } else {
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(${p.color}, ${p.opacity})`;
-          ctx.fill();
-        }
-      });
-
-      particleLoopRef.current = requestAnimationFrame(animateParticles);
-    };
-    particleLoopRef.current = requestAnimationFrame(animateParticles);
-
-    // Memicu ledakan partikel (burst) saat flash dimulai
-    const triggerBurst = () => {
-      const centerX = canvas.width / 2;
-      const centerY = canvas.height / 2;
-      const count = 75;
-
-      // 1. Ubah partikel yang ada agar melesat ke luar
-      particles.forEach((p) => {
-        const dx = p.x - centerX;
-        const dy = p.y - centerY;
-        const dist = Math.sqrt(dx * dx + dy * dy) || 1;
-        p.speedX = (dx / dist) * (Math.random() * 8 + 4);
-        p.speedY = (dy / dist) * (Math.random() * 8 + 4);
-        p.decay = Math.random() * 0.02 + 0.015;
-      });
-
-      // 2. Tambahkan partikel baru hasil ledakan dari pusat
-      for (let i = 0; i < count; i++) {
-        const angle = Math.random() * Math.PI * 2;
-        const speed = Math.random() * 9 + 3;
-        particles.push({
-          x: centerX,
-          y: centerY,
-          size: Math.random() * 2.5 + 0.8,
-          speedX: Math.cos(angle) * speed,
-          speedY: Math.sin(angle) * speed,
-          opacity: 1,
-          decay: Math.random() * 0.025 + 0.01,
-          color: "28, 46, 70"
-        });
-      }
-    };
 
     // GSAP Timeline setup
     const ctxGSAP = gsap.context(() => {
@@ -134,33 +27,28 @@ export default function MagicCircleIntro({ onComplete }: MagicCircleIntroProps) 
         }
       });
 
-      // 1. Animasi Masuk (Layar & Magic Circle memudar masuk)
-      tl.fromTo(containerRef.current, { opacity: 0 }, { opacity: 1, duration: 0.5 });
+      // 1. Animasi Masuk (Hanya Magic Circle yang memudar masuk & membesar halus, background tetap solid)
       tl.fromTo(
         circleWrapperRef.current, 
         { opacity: 0, scale: 0.7 }, 
-        { opacity: 1, scale: 1, duration: 1.5, ease: "power3.out" },
-        "<"
+        { opacity: 1, scale: 1, duration: 1.5, ease: "power3.out" }
       );
 
-      // 2. Jeda, lalu trigger Flash & Particle Burst
+      // 2. Jeda, lalu trigger Flash
       tl.to(
         flashOverlayRef.current,
         { 
           opacity: 1, 
           duration: 0.18, 
-          ease: "power2.in",
-          onStart: () => {
-            triggerBurst();
-          }
+          ease: "power2.in"
         },
-        "+=1.8"
+        "+=1.8" // Jeda waktu sebelum flash dimulai
       );
 
       // 3. Matikan visual lingkaran sihir saat layar putih
       tl.set(circleWrapperRef.current, { display: "none" });
 
-      // 4. Redupkan Flash secara perlahan + Trigger Gelombang Kejut (Shockwave)
+      // 4. Redupkan Flash secara perlahan + Trigger Gelombang Kejut (Shockwave) + Memudarkan container
       tl.to(
         flashOverlayRef.current,
         { 
@@ -176,7 +64,7 @@ export default function MagicCircleIntro({ onComplete }: MagicCircleIntroProps) 
           duration: 0.8, 
           ease: "power2.out" 
         },
-        "<"
+        "<" // Mulai redup bersamaan dengan memudarnya flash
       );
       tl.fromTo(
         shockwaveRef.current,
@@ -187,8 +75,6 @@ export default function MagicCircleIntro({ onComplete }: MagicCircleIntroProps) 
     }, containerRef);
 
     return () => {
-      window.removeEventListener("resize", resizeCanvas);
-      if (particleLoopRef.current) cancelAnimationFrame(particleLoopRef.current);
       ctxGSAP.revert();
     };
   }, [onComplete]);
@@ -198,12 +84,6 @@ export default function MagicCircleIntro({ onComplete }: MagicCircleIntroProps) 
       ref={containerRef}
       className="fixed inset-0 z-50 bg-background flex items-center justify-center overflow-hidden"
     >
-      {/* Canvas Partikel di Latar Belakang */}
-      <canvas 
-        ref={canvasRef} 
-        className="absolute inset-0 pointer-events-none z-0" 
-      />
-
       {/* Efek pendaran cahaya hangat halus di latar belakang */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.6)_0%,rgba(250,234,208,0)_75%)] pointer-events-none z-0" />
 
