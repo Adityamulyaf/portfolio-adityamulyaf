@@ -3,13 +3,13 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 
-export default function Hero() {
+export default function Hero({ active = true }: { active?: boolean }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLAnchorElement>(null);
   const arrowRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    if (containerRef.current) {
+    if (active && containerRef.current) {
       const items = containerRef.current.querySelectorAll(".gsap-hero-item");
       gsap.fromTo(
         items,
@@ -24,7 +24,7 @@ export default function Hero() {
         }
       );
     }
-  }, []);
+  }, [active]);
 
   useEffect(() => {
     const button = buttonRef.current;

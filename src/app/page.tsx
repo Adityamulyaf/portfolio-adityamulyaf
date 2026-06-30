@@ -84,7 +84,7 @@ export default function Home() {
       {/* Hero and Flower Divider: Absolute at bottom on mobile, normal flow on desktop */}
       <div className="relative w-full min-h-[100vh] md:min-h-none flex flex-col justify-center md:justify-start md:block">
         <header className="max-w-max-width mx-auto px-gutter md:px-xl w-full pt-[80px] md:pt-[120px] z-10 -translate-y-[8vh] md:translate-y-0">
-          <Hero />
+          <Hero active={!showIntro} />
         </header>
 
         {/* Flower Divider */}
