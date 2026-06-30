@@ -172,7 +172,7 @@ export default function MagicCircleIntro({ onComplete }: MagicCircleIntroProps) 
           }
         }
         .animate-rotate {
-          animation: rotateInfinite 15s linear infinite;
+          animation: rotateInfinite 1s linear infinite;
         }
         @keyframes rotateInfinite {
           from { transform: rotate(0deg); }
