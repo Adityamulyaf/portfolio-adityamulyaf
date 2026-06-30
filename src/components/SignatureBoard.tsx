@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import gsap from "gsap";
 import { db, isFirebaseConfigured } from "@/lib/firebase";
 import { collection, addDoc, onSnapshot, query, orderBy, serverTimestamp } from "firebase/firestore";
@@ -17,6 +18,7 @@ export default function SignatureBoard() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [name, setName] = useState("");
   const [isDrawing, setIsDrawing] = useState(false);
+  const [mounted, setMounted] = useState(false);
   
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
@@ -25,6 +27,9 @@ export default function SignatureBoard() {
 
   // Initialize and load signatures from Firestore or LocalStorage
   useEffect(() => {
+    setTimeout(() => {
+      setMounted(true);
+    }, 0);
     if (isFirebaseConfigured && db) {
       console.log("Firebase Firestore is active for Carved Statues guestbook.");
       const q = query(collection(db, "carved_statues"), orderBy("createdAt", "desc"));
@@ -327,7 +332,7 @@ export default function SignatureBoard() {
       </div>
 
       {/* Drawing Pad Modal */}
-      {isModalOpen && (
+      {isModalOpen && mounted && createPortal(
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/35 backdrop-blur-[4px] p-gutter">
           <div
             ref={modalRef}
@@ -417,7 +422,8 @@ export default function SignatureBoard() {
               </div>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   );
