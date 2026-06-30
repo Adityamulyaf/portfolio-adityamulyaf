@@ -331,7 +331,7 @@ export default function SignatureBoard() {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/35 backdrop-blur-[4px] p-gutter">
           <div
             ref={modalRef}
-            className="w-full max-w-[450px] bg-background border border-border rounded-xl shadow-2xl p-lg flex flex-col gap-md opacity-0 scale-95"
+            className="w-full max-w-[450px] bg-background border border-border rounded-xl shadow-2xl p-md sm:p-lg flex flex-col gap-sm sm:gap-md opacity-0 scale-95"
           >
             <div className="flex justify-between items-start">
               <div>
@@ -390,25 +390,25 @@ export default function SignatureBoard() {
             </div>
 
             {/* Controls */}
-            <div className="flex justify-between items-center mt-xs gap-sm">
+            <div className="flex flex-col sm:flex-row sm:justify-between items-center gap-md sm:gap-sm mt-xs">
               <button
                 onClick={clearCanvas}
-                className="font-mono-label text-[11px] uppercase tracking-widest text-secondary hover:text-primary transition-colors cursor-pointer focus:outline-none"
+                className="w-full sm:w-auto font-mono-label text-[11px] uppercase tracking-widest text-secondary hover:text-primary transition-colors cursor-pointer focus:outline-none text-center sm:text-left py-xs"
               >
                 Clear Slate
               </button>
 
-              <div className="flex gap-sm">
+              <div className="flex w-full sm:w-auto gap-sm justify-between sm:justify-end">
                 <button
                   onClick={() => setIsModalOpen(false)}
-                  className="font-mono-label text-[11px] uppercase tracking-widest text-secondary hover:text-primary transition-colors cursor-pointer focus:outline-none px-md py-sm rounded-md border border-border/40"
+                  className="flex-1 sm:flex-initial text-center font-mono-label text-[11px] uppercase tracking-widest text-secondary hover:text-primary transition-colors cursor-pointer focus:outline-none px-md py-sm rounded-md border border-border/40"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={handleCarve}
                   disabled={!name.trim()}
-                  className={`font-mono-label text-[11px] uppercase tracking-widest text-white bg-primary-container hover:bg-accent-hover transition-colors px-lg py-sm rounded-md shadow-md focus:outline-none cursor-pointer ${
+                  className={`flex-1 sm:flex-initial text-center font-mono-label text-[11px] uppercase tracking-widest text-white bg-primary-container hover:bg-accent-hover transition-colors px-md sm:px-lg py-sm rounded-md shadow-md focus:outline-none cursor-pointer ${
                     !name.trim() ? "opacity-50 pointer-events-none" : ""
                   }`}
                 >
