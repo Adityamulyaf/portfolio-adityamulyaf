@@ -12,7 +12,6 @@ gsap.registerPlugin(ScrollTrigger);
 export default function Contact() {
   const containerRef = useRef<HTMLDivElement>(null);
   const statueDesktopRef = useRef<HTMLDivElement>(null);
-  const statueMobileRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (containerRef.current) {
@@ -48,24 +47,6 @@ export default function Contact() {
         { y: -45 },
         {
           y: 45,
-          ease: "none",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: true,
-          },
-        }
-      );
-    }
-
-    const mobileStatue = statueMobileRef.current;
-    if (mobileStatue) {
-      gsap.fromTo(
-        mobileStatue,
-        { y: -25 },
-        {
-          y: 25,
           ease: "none",
           scrollTrigger: {
             trigger: containerRef.current,
@@ -155,17 +136,6 @@ export default function Contact() {
           />
         </div>
 
-        {/* Mobile Statue Image (Falls back to normal flow below links) */}
-        <div ref={statueMobileRef} className="relative w-full h-[280px] flex-shrink-0 md:hidden mt-xl">
-          <Image
-            src={myStatue}
-            alt="My Statue"
-            fill
-            sizes="100vw"
-            className="object-contain object-bottom pointer-events-none"
-            priority
-          />
-        </div>
       </div>
     </section>
   );
