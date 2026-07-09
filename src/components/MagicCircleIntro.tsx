@@ -14,10 +14,17 @@ export default function MagicCircleIntro({ onComplete }: MagicCircleIntroProps) 
   const circleWrapperRef = useRef<HTMLDivElement>(null);
   const flashOverlayRef = useRef<HTMLDivElement>(null);
   const shockwaveRef = useRef<HTMLDivElement>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
     // Sembunyikan scrollbar pada body saat intro berlangsung
     document.body.style.overflow = "hidden";
+
+    // Preload audio agar siap dimainkan tanpa jeda (delay) saat diklik
+    const audio = new Audio("/sounds/magic-sound.mp3");
+    audio.preload = "auto";
+    audio.load();
+    audioRef.current = audio;
 
     return () => {
       document.body.style.overflow = "";
@@ -25,9 +32,10 @@ export default function MagicCircleIntro({ onComplete }: MagicCircleIntroProps) 
   }, []);
 
   const startIntro = () => {
-    // Memutar sound effect
-    const audio = new Audio("/sounds/magic-sound.mp3");
-    audio.play().catch((err) => console.log("Audio playback blocked/failed:", err));
+    // Memutar sound effect yang sudah di-preload
+    if (audioRef.current) {
+      audioRef.current.play().catch((err) => console.log("Audio playback blocked/failed:", err));
+    }
 
     // Menjalankan timeline GSAP untuk koordinasi transisi
     const tl = gsap.timeline({
