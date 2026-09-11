@@ -6,6 +6,7 @@ import Hero from "@/components/Hero";
 import Projects from "@/components/Projects";
 import About from "@/components/About";
 import Skills from "@/components/Skills";
+import DragonFlight from "@/components/DragonFlight";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import Image from "next/image";
@@ -101,6 +102,13 @@ export default function Home() {
             activeSpecialization={activeSpecialization}
             onClearFilter={handleClearFilter}
           />
+        </div>
+
+        {/* Full width, like the flower divider: the dragon has to be able to
+            leave the screen at both edges. */}
+        <DragonFlight />
+
+        <div className="max-w-max-width mx-auto px-gutter md:px-xl w-full">
           <About
             activeSpecialization={activeSpecialization}
             onSelectSpecialization={setActiveSpecialization}
