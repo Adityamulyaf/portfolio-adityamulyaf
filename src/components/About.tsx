@@ -55,25 +55,25 @@ export default function About({
     <section className="pt-section-v pb-xl" id="about">
       <div
         ref={containerRef}
-        className="gsap-about-content opacity-0 max-w-[1000px] mx-auto text-left"
+        className="gsap-about-content opacity-0 text-left"
       >
-        <span className="font-mono-label text-[11px] text-text-muted uppercase mb-xs block tracking-[0.04em]">
-          ABOUT
+        <span className="font-body text-label text-text-muted mb-xs block">
+          About
         </span>
-        <h2 className="font-body-md text-headline-lg-mobile md:text-headline-lg font-bold text-text-primary mb-lg leading-tight">
+        <h2 className="font-display text-h2 italic text-text-primary mb-lg">
           Intentionality over domain.
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-xl">
           {/* Main Description */}
-          <div className="md:col-span-5 flex flex-col gap-md">
-            <p className="font-body-md text-[18px] md:text-[22px] text-secondary-fixed-dim leading-relaxed">
+          <div className="md:col-span-6 flex flex-col gap-md">
+            <p className="font-body text-lead font-light text-secondary-fixed-dim">
               I am a builder who codes and designs across robotics, mobile, and
               web. Currently pursuing Informatika at Universitas Sebelas Maret,
               I believe that great engineering isn&apos;t just about the code—it&apos;s
               about the purpose and physical nature of the solution.
             </p>
-            <p className="font-body-md text-[18px] md:text-[22px] text-secondary-fixed-dim leading-relaxed">
+            <p className="font-body text-lead font-light text-secondary-fixed-dim">
               Whether I&apos;m debugging a ROS node for an autonomous boat or
               refining the padding of a React component, my goal is to create
               systems that feel grounded, reliable, and expertly crafted.
@@ -81,7 +81,7 @@ export default function About({
           </div>
 
           {/* Photo Slot */}
-          <div className="md:col-span-4">
+          <div className="md:col-span-3">
             <div className="relative overflow-hidden rounded-card bg-surface aspect-[3/4] w-full">
               <Image
                 src="/about_profile.png"
@@ -96,7 +96,7 @@ export default function About({
           {/* Metadata Lists */}
           <div className="md:col-span-3 flex flex-col gap-md">
             <div>
-              <span className="font-mono-label text-[11px] text-text-muted uppercase block mb-xs tracking-[0.04em]">
+              <span className="font-body text-label text-text-muted block mb-xs">
                 Specializations
               </span>
               <div className="flex flex-col items-start gap-xs mt-xs">
@@ -108,7 +108,7 @@ export default function About({
                       onClick={() =>
                         onSelectSpecialization(isActive ? null : spec)
                       }
-                      className={`font-body-sm text-[15px] transition-all duration-200 text-left hover:text-primary-container focus:outline-none cursor-pointer ${
+                      className={`font-body text-small transition-all duration-200 text-left hover:text-primary-container focus:outline-none cursor-pointer ${
                         isActive
                           ? "text-primary-container font-semibold underline underline-offset-4"
                           : "text-text-primary font-normal"
@@ -121,10 +121,10 @@ export default function About({
               </div>
             </div>
             <div>
-              <span className="font-mono-label text-[11px] text-text-muted uppercase block mb-xs tracking-[0.04em]">
+              <span className="font-body text-label text-text-muted block mb-xs">
                 Location
               </span>
-              <p className="font-body-sm text-[15px] font-normal text-text-primary leading-relaxed">
+              <p className="font-body text-small text-text-primary">
                 Surakarta, ID
               </p>
             </div>

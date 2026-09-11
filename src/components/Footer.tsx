@@ -6,10 +6,10 @@ export default function Footer() {
     <footer className="bg-transparent border-t border-border mt-auto relative z-0 overflow-hidden">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center max-w-max-width mx-auto px-gutter md:px-xl pt-xl pb-[260px] md:pb-xl relative">
         <div className="mb-lg md:mb-0 text-left z-10">
-          <p className="font-mono-label text-[11px] text-on-surface uppercase tracking-widest mb-xs">
+          <p className="font-display italic text-h4 text-on-surface mb-xs">
             Adityamulyaf
           </p>
-          <p className="font-metadata text-[13px] text-secondary leading-relaxed">
+          <p className="font-body text-label text-secondary">
             © {new Date().getFullYear()} Adityamulyaf.
           </p>
         </div>

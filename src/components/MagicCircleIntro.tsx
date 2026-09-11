@@ -115,9 +115,9 @@ export default function MagicCircleIntro({ onComplete }: MagicCircleIntroProps) 
       <button
         ref={buttonRef}
         onClick={startIntro}
-        className="z-20 font-display-hero italic text-[40px] sm:text-[64px] text-primary tracking-[0.15em] hover:scale-105 active:scale-95 transition-all duration-300 relative cursor-pointer pulsing-text px-lg py-md focus:outline-none"
+        className="z-20 font-display italic text-h2 text-primary tracking-[0.08em] hover:scale-105 active:scale-95 transition-all duration-300 relative cursor-pointer pulsing-text px-lg py-md focus:outline-none"
       >
-        Zoltraak
+        Adityamulyaf
       </button>
 
       {/* Kontainer Utama Animasi Lingkaran Sihir (Dimulai dengan opacity 0) */}

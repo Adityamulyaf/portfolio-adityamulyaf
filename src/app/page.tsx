@@ -5,10 +5,9 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Projects from "@/components/Projects";
 import About from "@/components/About";
+import Skills from "@/components/Skills";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
-import ProjectDetails from "@/components/ProjectDetails";
-import { Project } from "@/data/projects";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -22,15 +21,11 @@ if (typeof window !== "undefined") {
 export default function Home() {
   const [showIntro, setShowIntro] = useState(true);
   const [activeSpecialization, setActiveSpecialization] = useState<string | null>(null);
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const flowerRef = useRef<HTMLDivElement>(null);
 
   const handleClearFilter = () => {
     setActiveSpecialization(null);
   };
-
-  // Note: ESC key handling is managed inside ProjectDetails
-  // to allow the close animation to complete before clearing state.
 
   useEffect(() => {
     // Mengecek apakah user sudah berkunjung di sesi browser ini
@@ -100,26 +95,28 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Main container for standard sections */}
-      <main className="max-w-max-width mx-auto px-gutter md:px-xl flex-1 flex flex-col">
-        <Projects
-          activeSpecialization={activeSpecialization}
-          onSelectProject={setSelectedProject}
-          onClearFilter={handleClearFilter}
-        />
-        <About
-          activeSpecialization={activeSpecialization}
-          onSelectSpecialization={setActiveSpecialization}
-        />
-        <Contact />
+      <main className="flex-1 flex flex-col">
+        <div className="max-w-max-width mx-auto px-gutter md:px-xl w-full">
+          <Projects
+            activeSpecialization={activeSpecialization}
+            onClearFilter={handleClearFilter}
+          />
+          <About
+            activeSpecialization={activeSpecialization}
+            onSelectSpecialization={setActiveSpecialization}
+          />
+        </div>
+
+        {/* Skills runs the full width of the window: its staves are meant to
+            be cut off by the screen edge, which cannot happen inside a
+            container that stops short of it. It holds its own gutters. */}
+        <Skills />
+
+        <div className="max-w-max-width mx-auto px-gutter md:px-xl w-full">
+          <Contact />
+        </div>
       </main>
       <Footer />
-
-      {/* Project Details — Ancient Scroll Overlay */}
-      <ProjectDetails
-        project={selectedProject}
-        onClose={() => setSelectedProject(null)}
-      />
     </>
   );
 }

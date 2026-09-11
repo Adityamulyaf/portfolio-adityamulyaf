@@ -89,14 +89,14 @@ export default function Hero({ active = true }: { active?: boolean }) {
     <section className="py-md flex flex-col items-start w-full" id="hero">
       <div ref={containerRef} className="w-full max-w-[800px] text-left flex flex-col items-start">
         {/* Nameplate */}
-        <h1 className="gsap-hero-item opacity-0 font-display-hero text-hero text-text-primary italic tracking-tight font-normal leading-none mb-sm">
+        <h1 className="gsap-hero-item opacity-0 font-display text-display italic text-text-primary mb-sm">
           Hi, I&apos;m Ditya!
         </h1>
 
         {/* Descriptor */}
-        <p className="gsap-hero-item opacity-0 font-body-md text-[20px] md:text-[28px] font-light text-secondary-fixed-dim leading-relaxed mb-xl max-w-[700px]">
+        <p className="gsap-hero-item opacity-0 font-body text-lead font-light text-secondary-fixed-dim mb-xl max-w-[60ch]">
           A Builder. Informatics student at{" "}
-          <span className="text-on-surface italic font-normal">
+          <span className="font-display italic text-[1.15em] text-on-surface">
             Universitas Sebelas Maret.
           </span>
         </p>
@@ -106,7 +106,7 @@ export default function Hero({ active = true }: { active?: boolean }) {
           <a
             ref={buttonRef}
             href="#projects"
-            className="font-body-md text-[15px] font-medium text-primary-container hover:text-accent-hover transition-colors inline-flex items-center gap-xs link-hover group"
+            className="font-body text-small font-medium text-primary-container hover:text-accent-hover transition-colors inline-flex items-center gap-xs link-hover group"
             style={{ display: "inline-flex" }}
           >
             <span>See my work</span>{" "}

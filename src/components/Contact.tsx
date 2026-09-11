@@ -5,7 +5,7 @@ import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import myStatue from "../../public/my-statue.png";
-import SignatureBoard from "./SignatureBoard";
+import GuestbookTeaser from "./GuestbookTeaser";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -68,10 +68,10 @@ export default function Contact() {
         {/* Left Column */}
         <div className="flex flex-col flex-grow pb-xl md:pb-lg md:pr-[370px] lg:pr-[480px] gap-xl justify-start">
           <div>
-            <span className="font-mono-label text-[11px] text-text-muted uppercase mb-xs block tracking-[0.04em]">
-              CONNECT
+            <span className="font-body text-label text-text-muted mb-xs block">
+              Connect
             </span>
-            <h2 className="font-body-md text-headline-lg-mobile md:text-headline-lg font-bold text-text-primary mb-xl leading-none">
+            <h2 className="font-display text-h2 italic text-text-primary mb-xl">
               Let&apos;s build something.
             </h2>
           </div>
@@ -79,10 +79,10 @@ export default function Contact() {
           <div className="flex flex-col sm:flex-row flex-wrap gap-xl">
             {/* Email Link */}
             <a href="mailto:adityamulyaf@gmail.com" className="group">
-              <span className="font-mono-label text-[11px] text-text-muted uppercase block mb-xs tracking-[0.04em]">
+              <span className="font-body text-label text-text-muted block mb-xs">
                 Email
               </span>
-              <span className="font-body-md text-headline-md-mobile md:text-[24px] font-medium text-primary-container link-hover">
+              <span className="font-body text-lead font-medium text-primary-container link-hover">
                 adityamulyaf@gmail.com
               </span>
             </a>
@@ -94,10 +94,10 @@ export default function Contact() {
               rel="noopener noreferrer"
               className="group"
             >
-              <span className="font-mono-label text-[11px] text-text-muted uppercase block mb-xs tracking-[0.04em]">
+              <span className="font-body text-label text-text-muted block mb-xs">
                 LinkedIn
               </span>
-              <span className="font-body-md text-headline-md-mobile md:text-[24px] font-medium text-primary-container link-hover">
+              <span className="font-body text-lead font-medium text-primary-container link-hover">
                 Firizqi Aditya Mulya
               </span>
             </a>
@@ -109,10 +109,10 @@ export default function Contact() {
               rel="noopener noreferrer"
               className="group"
             >
-              <span className="font-mono-label text-[11px] text-text-muted uppercase block mb-xs tracking-[0.04em]">
+              <span className="font-body text-label text-text-muted block mb-xs">
                 GitHub
               </span>
-              <span className="font-body-md text-headline-md-mobile md:text-[24px] font-medium text-primary-container link-hover">
+              <span className="font-body text-lead font-medium text-primary-container link-hover">
                 @adityamulyaf
               </span>
             </a>
@@ -120,7 +120,7 @@ export default function Contact() {
 
           {/* Signature Guestbook */}
           <div className="mt-md border-t border-border/40 pt-lg">
-            <SignatureBoard />
+            <GuestbookTeaser />
           </div>
         </div>
 

@@ -14,24 +14,83 @@
   --color-text-primary: #1C2E46; /* deep dark blue */
   --color-text-muted: #5B6777;
   --color-accent-hover: #436F9B; /* medium-light ocean blue */
+
+  /* Parchment accents — shared with the Codex scroll overlay. */
+  --color-parchment: #8B6E3C;      /* rule + label gold */
+  --color-parchment-deep: #5C3D14; /* body ink on parchment */
+  --color-parchment-dark: #2A1A06; /* display ink on parchment */
   --color-secondary-fixed-dim: #5B6777;
-  
-  --font-display-hero: var(--font-instrument-serif), Georgia, serif;
-  --font-body-md: var(--font-dm-sans), system-ui, sans-serif;
-  --font-body-sm: var(--font-dm-sans), system-ui, sans-serif;
-  --font-label-lg: var(--font-dm-sans), system-ui, sans-serif;
-  --font-headline-lg-mobile: var(--font-dm-sans), system-ui, sans-serif;
-  --font-headline-lg: var(--font-dm-sans), system-ui, sans-serif;
-  --font-headline-md: var(--font-dm-sans), system-ui, sans-serif;
-  --font-mono-label: var(--font-jetbrains-mono), monospace;
-  --font-metadata: var(--font-dm-sans), system-ui, sans-serif;
-  
+
+  /* ── Typefaces ──────────────────────────────────────────────
+     Two families, two jobs. Instrument Serif carries every
+     display voice; DM Sans carries everything a reader has to
+     read or click. Instrument Serif ships weight 400 only, so
+     never pair it with font-bold/semibold — that synthesises
+     a fake bold and muddies the italic. */
+  --font-display: var(--font-instrument-serif), Georgia, serif;
+  --font-body: var(--font-dm-sans), system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+  --font-sans: var(--font-dm-sans), system-ui, sans-serif; /* page default */
+
+  /* ── Type scale ─────────────────────────────────────────────
+     Each step carries its own leading and tracking: display
+     sizes need tight leading and negative tracking, reading
+     sizes need open leading and none. */
+  --text-display: clamp(2.75rem, 8.5vw, 5.5rem);
+  --text-display--line-height: 0.92;
+  --text-display--letter-spacing: -0.02em;
+
+  --text-h2: clamp(2.25rem, 5.5vw, 4rem);
+  --text-h2--line-height: 0.98;
+  --text-h2--letter-spacing: -0.015em;
+
+  /* Flagship project titles sit between a section head and a card head. */
+  --text-feature: clamp(1.875rem, 3.2vw, 2.75rem);
+  --text-feature--line-height: 1.05;
+  --text-feature--letter-spacing: -0.015em;
+
+  --text-h3: clamp(1.5rem, 2.4vw, 1.875rem);
+  --text-h3--line-height: 1.15;
+  --text-h3--letter-spacing: -0.01em;
+
+  --text-h4: 1.25rem;
+  --text-h4--line-height: 1.25;
+  --text-h4--letter-spacing: -0.01em;
+
+  --text-lead: clamp(1.125rem, 1.5vw, 1.375rem);
+  --text-lead--line-height: 1.6;
+
+  --text-body: 1rem;
+  --text-body--line-height: 1.7;
+
+  --text-small: 0.875rem;
+  --text-small--line-height: 1.65;
+
+  --text-label: 0.8125rem;
+  --text-label--line-height: 1.4;
+  --text-label--letter-spacing: 0.04em;
+
+  --text-micro: 0.75rem;
+  --text-micro--line-height: 1.4;
+  --text-micro--letter-spacing: 0.04em;
+
+  /* Lift plus a hairline of light along the top edge, so the pill reads as
+     glass sitting above the page rather than a flat tinted rectangle. */
+  --shadow-warm-glass: 0 1px 0 rgba(255, 255, 255, 0.55) inset,
+    0 6px 24px rgba(44, 32, 16, 0.1), 0 1px 3px rgba(44, 32, 16, 0.06);
+
   --radius-lg: 0.5rem;
   --radius-xl: 0.75rem;
   --radius-card: 8px;
-  
+
   --spacing-gutter: 24px;
-  --spacing-section-v: 192px;
+  --spacing-section-v: 128px;
+  /* Half a section step, for a section that follows an illustrated divider:
+     the artwork already does half the separating. */
+  --spacing-section-v-tight: 64px;
+  /* Mobile only. The flower divider is absolutely placed there and hangs past
+     the hero, so the next section has to clear it rather than merely follow it. */
+  --spacing-divider-clear: 112px;
   --spacing-sm: 16px;
   --spacing-xs: 8px;
   --spacing-lg: 32px;
@@ -40,6 +99,20 @@
   --spacing-base: 8px;
   --spacing-md: 24px;
   --spacing-max-width: 1200px;
+}
+
+/* Headlines break on meaning, not on the raw edge of the box. */
+h1, h2, h3, h4 {
+  text-wrap: balance;
+}
+p {
+  text-wrap: pretty;
+}
+
+/* Optical sizing so Instrument Serif stays sturdy across the scale. */
+.font-display {
+  font-optical-sizing: auto;
+  font-synthesis-weight: none;
 }
 
 /* Custom micro-animations & transitions */
@@ -64,24 +137,31 @@
   width: 100%;
 }
 
-/* Custom Typography Utilities */
-.text-hero {
-  font-size: clamp(38px, 9vw, 56px);
+/* The skills orbit: one ring turns, and every mark on it turns back by the
+   same amount so it stays upright. Equal durations are what keeps them level. */
+@keyframes orbit-turn {
+  to { transform: rotate(360deg); }
 }
-@media (min-width: 768px) {
-  .text-hero {
-    font-size: clamp(56px, 8vw, 96px);
+@keyframes orbit-turn-back {
+  to { transform: rotate(-360deg); }
+}
+.orbit-spin {
+  animation: orbit-turn 48s linear infinite;
+}
+.orbit-counter {
+  animation: orbit-turn-back 48s linear infinite;
+}
+.orbit-paused .orbit-spin,
+.orbit-paused .orbit-counter {
+  animation-play-state: paused;
+}
+
+/* Honour reduced-motion: no spin, no scroll-jacking, no entrance transforms. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
-}
-.text-headline-lg {
-  font-size: clamp(40px, 5vw, 64px);
-}
-.text-headline-lg-mobile {
-  font-size: clamp(30px, 8vw, 40px);
-}
-.text-headline-md {
-  font-size: clamp(24px, 3vw, 36px);
-}
-.text-headline-md-mobile {
-  font-size: clamp(20px, 6vw, 24px);
 }

@@ -7,7 +7,6 @@ export interface Project {
   imageUrl: string;
   projectUrl: string;
   liveUrl?: string; // optional — only web projects have a live deployment
-  gridClass: string; // 'md:col-span-8', 'md:col-span-6', 'md:col-span-4'
   specializations: string[]; // ["Software Architecture", "Embedded Systems", "UI/UX Design"]
   details: {
     overview: string;
@@ -28,7 +27,6 @@ export const projects: Project[] = [
     stack: ["C++", "ROS", "Hardware Design"],
     imageUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuBwfFqd50_dwuIMIsyuBRbDBmsY4Cs1sushevfMihmMMinekAaLN28PHYAJEvrp-6IqGW_SKYZ6D1sj27kcSxGdVv4ffanZ2GXQRt-6enUjIne5Dj51zAiOs_pbVx5yRZR-ApP5s9iq22wZL6UArSFSiBjgHUd7WQPicGzu_wf4W7ps5q6gd6ZwLmOjpLJFD4oRC4eXwmkbGjw4iWRa1Oi6aCRuseWai-L0STCjXAqGKmj8wOWjL7-KtTqveuZ10gvxfMmcJJMtUVlM",
     projectUrl: "https://github.com/firizqi/roboboat",
-    gridClass: "md:col-span-8",
     specializations: ["Embedded Systems", "Software Architecture"],
     details: {
       overview: "An autonomous surface vessel engineered for custom bathymetric navigation and obstacle avoidance. Developed as part of the Bengawan UV team for international marine competitions.",
@@ -60,7 +58,6 @@ private:
     imageUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuDIcT9HvmZG1O4ALbceVwpLSKg8DJPmJsJOzRCRSRWV837YKjF3DXYqmjsbEswnv5LTcKiLmRaWNsR1j5S2EQk6G1-uIofeQzU2uP6NgWSLwZOYnNgA5utCxbhI8A-su2L-WvTn4Gzl9sPYdhrBZ4LehPrxJPUgOY6AZH9jfOA1BomkNEuLEgQPz9HW530PryYoAeOwVXER8NIUX40ET93qzpgMa5ioqLJwly9QjacseFY1qWW__O3uSnhvx49dpkgIPXw-WSRadxWM",
     projectUrl: "https://github.com/firizqi/automawhat",
     liveUrl: "https://automawhat.vercel.app",
-    gridClass: "md:col-span-4",
     specializations: ["UI/UX Design", "Software Architecture"],
     details: {
       overview: "A lightweight debugger mapping states, finite automata (NFA/DFA), and state-chart triggers directly into structured workflows. Created to reduce friction during compiler design theory classes.",
@@ -84,7 +81,6 @@ private:
     stack: ["Flutter", "Firebase"],
     imageUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuB3mScnaOJ2MF6o_uWbZ-rkce_Vl2ekssLnDJecHTPW0ir5AW8r-IurG_rdo8ujuDrWVXp1b9DggDSC1bcAKt99hPuC1ZGSP-8TaFzD3hD9x2wcBpKYlKSNF4vL2tQNHrr4pi-X1JXOvttkH7LOGrA0UOBjZvznAkeaXHUs3rVEX37hAmBSQ1RUl9oTEPs77LMUK8m-83PzJa1X7vwkQs2ZSaOn21P5FjKfGm8m4KM5qNeYgsx45eMFYsGt9a2BFOLIp69nwzzqZger",
     projectUrl: "https://github.com/firizqi/halombg",
-    gridClass: "md:col-span-4",
     specializations: ["UI/UX Design", "Software Architecture"],
     details: {
       overview: "Mobile portal allowing students in remote subdistricts to sign up for educational bootcamps, share academic opportunities, and review local mentoring resources.",
@@ -109,7 +105,6 @@ private:
     stack: ["Python", "TensorFlow", "Scikit-Learn"],
     imageUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuCqTCIbjkLDxzCY9fx4UDxEUQzQluiuiHBO3Jy20sERtAFvUjSq5DDc2dxrWjLRB13BQ4cBiA1dIRlIUT4OMg8aYzKmMEVUdNnlfrKD6AmV3S3LtT3DDomUqO3bP-3sztd-wTU89l542m2DQVvacjz1s3qyfAnvaoFZDNK7t3LFc3oiP60LZvJtsZbaPslut6zQNIeERHAHFRBTtkgJ-ilK4werTeM21PQ03FKXIaGGoRR35upsS6mft1ITkDUKChvoQ8ZvkvfGea1k",
     projectUrl: "https://github.com/firizqi/stroke-prediction-ml",
-    gridClass: "md:col-span-8",
     specializations: ["Software Architecture"],
     details: {
       overview: "A custom machine learning pipeline that consumes demographic and diagnostic variables to return real-time patient stroke hazard values, optimized for clinical triage.",
@@ -135,7 +130,6 @@ def calculate_shap_values(model, X_train):
     stack: ["Kotlin", "Retrofit"],
     imageUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuBk_4zKFkQbD6IBxQoM3gc4WDc68Gbef5KhxMDj8jHJ4lyEUpVNOOcNI8Uw2LmgLitHTanARgohQQQ2KOa66L01vxGIrKlAeFkzZVv4QaSpm_Lk6VPcPtBjmiU3KRxt6M7Cf3bYWTX8IXLTeJ54isFgiXK34WB__sY7Us448NfLLXxqjMemW88OslVmcQ7tAFuSN6XOEDsGu6RJMTuhHtCyUE0-SNjZ_ayg1eSjzDWuxXU38DCyUz6JhCaDyZf4KYNXnNcV4dp0gCON",
     projectUrl: "https://github.com/firizqi/lectinfor",
-    gridClass: "md:col-span-6",
     specializations: ["UI/UX Design", "Software Architecture"],
     details: {
       overview: "An Android application designed to aggregate lecture schedules, assign due dates, and dynamically display office hours for Informatics Department professors.",
@@ -158,7 +152,6 @@ def calculate_shap_values(model, X_train):
     imageUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuDbcTmEHw_Z1R6ExwNG8kx_Cpu7XcBS4qPzRcSG4guKM6LIcOvuZ7llNrRKmtZL0N3RvD43UR6bowpfvQfXHoweZEvswpVOEJqgX2e7m5uSHsWHKw2c4kSK8_cxWRch-vocHmYoiLqgGZpN7RlLAqpSJt4QxJn01qPZA2u4Juri6WyeeyhXx-KpPTD-e91W0nkE3mw0l1XuqK_CdbLYr3cHeq-Qe_vsDIAHRxu6HyWBICfeCghjojHWfimvsVPmau6KzR5_LDC4p7Zg",
     projectUrl: "https://github.com/firizqi/bengawan-uv-web",
     liveUrl: "https://bengawanuv.vercel.app",
-    gridClass: "md:col-span-6",
     specializations: ["UI/UX Design", "Software Architecture"],
     details: {
       overview: "The digital homepage of the Bengawan Unmanned Vehicle research group, detailing competition timelines, research outputs, and team rosters.",

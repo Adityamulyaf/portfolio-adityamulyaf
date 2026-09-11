@@ -12,6 +12,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // VS Code's Local History extension keeps truncated snapshots of edited
+    // files here; linting them reports parse errors that exist in no source.
+    ".history/**",
   ]),
 ]);
 
