@@ -1,8 +1,19 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import gsap from "gsap";
+import { useDecodedAudio } from "@/lib/useDecodedAudio";
+
+/** How long a click made before the sound is ready will wait for it. */
+const MAX_WAIT_MS = 2000;
+
+/**
+ * How long the audio clock has to start ticking before the animation stops
+ * waiting on it and runs silently. Covers a refused or never-settling
+ * resume(), which would otherwise freeze the intro permanently.
+ */
+const SILENT_FALLBACK_MS = 400;
 
 interface MagicCircleIntroProps {
   onComplete: () => void;
@@ -14,35 +25,39 @@ export default function MagicCircleIntro({ onComplete }: MagicCircleIntroProps) 
   const circleWrapperRef = useRef<HTMLDivElement>(null);
   const flashOverlayRef = useRef<HTMLDivElement>(null);
   const shockwaveRef = useRef<HTMLDivElement>(null);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const { status: audioStatus, start: startAudio } = useDecodedAudio(
+    "/sounds/magic-sound.mp3"
+  );
+  // Set by a click that arrived before the sound had finished decoding.
+  const [waiting, setWaiting] = useState(false);
+  const startedRef = useRef(false);
 
   useEffect(() => {
     // Sembunyikan scrollbar pada body saat intro berlangsung
     document.body.style.overflow = "hidden";
-
-    // Preload audio agar siap dimainkan tanpa jeda (delay) saat diklik
-    const audio = new Audio("/sounds/magic-sound.mp3");
-    audio.preload = "auto";
-    audio.load();
-    audioRef.current = audio;
-
     return () => {
       document.body.style.overflow = "";
     };
   }, []);
 
-  const startIntro = () => {
-    // Memutar sound effect yang sudah di-preload
-    if (audioRef.current) {
-      audioRef.current.play().catch((err) => console.log("Audio playback blocked/failed:", err));
-    }
+  const finish = () => {
+    document.body.style.overflow = "";
+    onComplete();
+  };
+
+  const run = () => {
+    if (startedRef.current) return;
+    startedRef.current = true;
+
+    // elapsed() reports seconds since the first sample actually left, or is
+    // null when there is no sound — in which case the timeline keeps its own
+    // time and the intro plays silently.
+    const elapsed = startAudio();
 
     // Menjalankan timeline GSAP untuk koordinasi transisi
     const tl = gsap.timeline({
-      onComplete: () => {
-        document.body.style.overflow = "";
-        onComplete();
-      }
+      paused: elapsed !== null,
+      onComplete: elapsed === null ? finish : undefined,
     });
 
     // 1. Fade out tombol "Zoltraak" (mulai detik 0)
@@ -101,7 +116,78 @@ export default function MagicCircleIntro({ onComplete }: MagicCircleIntroProps) 
       { scale: 5, opacity: 0, duration: 1.0, ease: "power3.out" },
       1.5
     );
+
+    if (!elapsed) {
+      tl.play();
+      return;
+    }
+
+    // Drive the timeline from the audio clock instead of letting it run on its
+    // own. The cue at 1.5s is then 1.5s *of sound*, so the flash cannot drift
+    // away from the climax over the two seconds it takes to get there.
+    const total = tl.duration();
+    const clickedAt = performance.now();
+
+    // A context that has not resumed yet reports a frozen clock, which is the
+    // right thing to wait on — for a moment. But resume() can also be refused
+    // outright, or never settle, and a timeline slaved to a clock that never
+    // starts would leave the reader stranded on the intro forever. So the
+    // audio clock gets a short grace period to prove it is running, and if it
+    // does not, the animation goes on without it.
+    const releaseTimeline = () => {
+      gsap.ticker.remove(sync);
+      tl.eventCallback("onComplete", finish);
+      tl.play();
+    };
+
+    const sync = () => {
+      const t = elapsed();
+
+      if (t <= 0) {
+        if (performance.now() - clickedAt > SILENT_FALLBACK_MS) releaseTimeline();
+        return;
+      }
+      if (t >= total) {
+        gsap.ticker.remove(sync);
+        tl.time(total, true);
+        finish();
+        return;
+      }
+      tl.time(t, true);
+    };
+
+    sync(); // render frame zero now rather than a tick from now
+    gsap.ticker.add(sync);
   };
+
+  /**
+   * A click before the sound is ready is honoured, not refused: it waits for
+   * the decode and starts the moment it lands. MAX_WAIT_MS caps that wait so a
+   * sound that never arrives cannot strand anyone on the intro screen.
+   */
+  const startIntro = () => {
+    if (startedRef.current) return;
+
+    if (audioStatus === "loading") {
+      setWaiting(true);
+      return;
+    }
+    run();
+  };
+
+  useEffect(() => {
+    if (!waiting || audioStatus === "loading") return;
+    run();
+    // run() is stable for the life of the intro: it only touches refs.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [waiting, audioStatus]);
+
+  useEffect(() => {
+    if (!waiting) return;
+    const id = setTimeout(() => run(), MAX_WAIT_MS);
+    return () => clearTimeout(id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [waiting]);
 
   return (
     <div 
@@ -115,7 +201,12 @@ export default function MagicCircleIntro({ onComplete }: MagicCircleIntroProps) 
       <button
         ref={buttonRef}
         onClick={startIntro}
-        className="z-20 font-display italic text-h2 text-primary tracking-[0.08em] hover:scale-105 active:scale-95 transition-all duration-300 relative cursor-pointer pulsing-text px-lg py-md focus:outline-none"
+        aria-busy={waiting}
+        className={`z-20 font-display italic text-h2 text-primary tracking-[0.08em] transition-all duration-300 relative pulsing-text px-lg py-md focus:outline-none ${
+          waiting
+            ? "cursor-wait opacity-70"
+            : "cursor-pointer hover:scale-105 active:scale-95"
+        }`}
       >
         Adityamulyaf
       </button>

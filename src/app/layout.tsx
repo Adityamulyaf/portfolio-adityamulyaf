@@ -39,6 +39,19 @@ export default function RootLayout({
       className={`${instrumentSerif.variable} ${dmSans.variable} ${jetBrainsMono.variable}`}
       suppressHydrationWarning
     >
+      <head>
+        {/* The intro sound is fetched and decoded by MagicCircleIntro, but that
+            cannot begin until React has hydrated. Starting the download with
+            the document buys those seconds back, so the sound is usually
+            already in memory by the time anyone can click. */}
+        <link
+          rel="preload"
+          as="fetch"
+          href="/sounds/magic-sound.mp3"
+          type="audio/mpeg"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body className="bg-background text-on-surface selection:bg-primary-container selection:text-on-primary-container min-h-screen flex flex-col font-sans">
         <SmoothScroll>{children}</SmoothScroll>
       </body>
