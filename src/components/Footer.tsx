@@ -19,7 +19,7 @@ interface FooterProps {
 export default function Footer({ showContactIcons = false }: FooterProps) {
   return (
     <footer className="bg-transparent border-t border-border mt-auto relative z-0 overflow-hidden">
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center max-w-max-width mx-auto px-gutter md:px-xl pt-xl pb-[260px] md:pb-xl gap-lg relative">
+      <div className="flex flex-row justify-between items-start md:items-center max-w-max-width mx-auto px-gutter md:px-xl pt-xl pb-[260px] md:pb-xl gap-lg relative">
         <div className="text-left z-10">
           <p className="font-display italic text-h4 text-on-surface mb-xs">
             Adityamulyaf
@@ -31,7 +31,7 @@ export default function Footer({ showContactIcons = false }: FooterProps) {
 
         {/* Icon-only: the destination is enough, no label needed. */}
         {showContactIcons && (
-          <div className="flex items-center gap-md z-10 self-end md:self-auto">
+          <div className="flex items-center gap-md z-10">
             {CONTACT_LINKS.map((contact) => (
               <a
                 key={contact.label}

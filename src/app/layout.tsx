@@ -57,9 +57,6 @@ export default function RootLayout({
       </head>
       <body
         className="bg-background text-on-surface selection:bg-primary-container selection:text-on-primary-container min-h-screen flex flex-col font-sans"
-        // Browser extensions like Grammarly inject attributes (e.g.
-        // data-new-gr-c-s-check-loaded) into <body> before React hydrates,
-        // which React would otherwise flag as a hydration mismatch.
         suppressHydrationWarning
       >
         <SmoothScroll>{children}</SmoothScroll>
