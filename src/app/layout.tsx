@@ -23,8 +23,8 @@ const jetBrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Firizqi Aditya Mulya | Portfolio",
-  description: "Personal portfolio of Firizqi Aditya Mulya",
+  title: "Firizqi Aditya Mulya | Frieren Theme Portfolio",
+  description: "Creative portfolio of Firizqi Aditya Mulya",
   authors: [{ name: "Firizqi Aditya Mulya" }],
 };
 
