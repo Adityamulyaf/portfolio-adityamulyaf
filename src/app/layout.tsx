@@ -23,8 +23,8 @@ const jetBrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Firizqi Aditya Mulya | Intentional Builder",
-  description: "Personal portfolio of Firizqi Aditya Mulya, an Informatika student at Universitas Sebelas Maret and cross-disciplinary builder coding in robotics, web, machine learning, and mobile apps.",
+  title: "Firizqi Aditya Mulya | Portfolio",
+  description: "Personal portfolio of Firizqi Aditya Mulya",
   authors: [{ name: "Firizqi Aditya Mulya" }],
 };
 
