@@ -24,7 +24,7 @@ export const projects: Project[] = [
     title: "RoboBoat 2026: Autonomous Surface Vehicle",
     domain: "Robotics, Autonomous Systems",
     description: "Autonomous surface vehicle competing in the international RoboBoat challenge.",
-    stack: ["Python", "ROS", "MAVROS", "YOLOv4-Tiny", "TensorRT", "OpenCV", "ArduPilot"],
+    stack: ["Python", "ROS", "MAVROS", "YOLO", "TensorRT", "OpenCV", "ArduPilot"],
     imageUrl: "/projects/roboboat.webp",
     projectUrl: "https://buvroboboatuns.com",
     specializations: ["Autonomous Systems", "Sensor Fusion", "Embedded Systems"],
