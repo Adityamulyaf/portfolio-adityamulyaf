@@ -31,7 +31,7 @@ export default function Footer({ showContactIcons = false }: FooterProps) {
 
         {/* Icon-only: the destination is enough, no label needed. */}
         {showContactIcons && (
-          <div className="flex items-center gap-md z-10">
+          <div className="flex items-center gap-md z-10 self-end md:self-auto">
             {CONTACT_LINKS.map((contact) => (
               <a
                 key={contact.label}
