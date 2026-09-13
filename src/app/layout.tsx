@@ -43,16 +43,25 @@ export default function RootLayout({
         {/* The intro sound is fetched and decoded by MagicCircleIntro, but that
             cannot begin until React has hydrated. Starting the download with
             the document buys those seconds back, so the sound is usually
-            already in memory by the time anyone can click. */}
+            already in memory by the time anyone can click.
+            No crossOrigin here: this is a same-origin file, and useDecodedAudio's
+            fetch() uses default (same-origin) credentials — a mismatched
+            crossorigin attribute makes Chrome treat this as a different request
+            and reload it from scratch instead of reusing the preload. */}
         <link
           rel="preload"
           as="fetch"
           href="/sounds/magic-sound.mp3"
           type="audio/mpeg"
-          crossOrigin="anonymous"
         />
       </head>
-      <body className="bg-background text-on-surface selection:bg-primary-container selection:text-on-primary-container min-h-screen flex flex-col font-sans">
+      <body
+        className="bg-background text-on-surface selection:bg-primary-container selection:text-on-primary-container min-h-screen flex flex-col font-sans"
+        // Browser extensions like Grammarly inject attributes (e.g.
+        // data-new-gr-c-s-check-loaded) into <body> before React hydrates,
+        // which React would otherwise flag as a hydration mismatch.
+        suppressHydrationWarning
+      >
         <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>

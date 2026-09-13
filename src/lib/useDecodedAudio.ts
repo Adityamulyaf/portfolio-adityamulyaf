@@ -24,6 +24,7 @@ type Status = "loading" | "ready" | "unavailable";
 export function useDecodedAudio(src: string) {
   const ctxRef = useRef<AudioContext | null>(null);
   const bufferRef = useRef<AudioBuffer | null>(null);
+  const sourceRef = useRef<AudioBufferSourceNode | null>(null);
   const [status, setStatus] = useState<Status>("loading");
 
   useEffect(() => {
@@ -65,8 +66,18 @@ export function useDecodedAudio(src: string) {
 
     return () => {
       cancelled = true;
-      void ctx?.close();
       ctxRef.current = null;
+
+      // A source already playing (e.g. the caller unmounted right as the
+      // intro animation finished, while the sound's tail was still ringing
+      // out) gets to finish naturally instead of being cut off by closing
+      // the context under it. Nothing playing yet just closes immediately.
+      const playing = sourceRef.current;
+      if (playing) {
+        playing.onended = () => void ctx?.close();
+      } else {
+        void ctx?.close();
+      }
     };
   }, [src]);
 
@@ -87,6 +98,7 @@ export function useDecodedAudio(src: string) {
     const source = ctx.createBufferSource();
     source.buffer = buffer;
     source.connect(ctx.destination);
+    sourceRef.current = source;
 
     const at = ctx.currentTime;
     source.start(at);

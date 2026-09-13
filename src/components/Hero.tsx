@@ -95,10 +95,7 @@ export default function Hero({ active = true }: { active?: boolean }) {
 
         {/* Descriptor */}
         <p className="gsap-hero-item opacity-0 font-body text-lead font-light text-secondary-fixed-dim mb-xl max-w-[60ch]">
-          A Builder. Informatics student at{" "}
-          <span className="font-display italic text-[1.15em] text-on-surface">
-            Universitas Sebelas Maret.
-          </span>
+          I build autonomous vehicles, AI models, and whatever seems interesting.
         </p>
 
         {/* Call to action */}

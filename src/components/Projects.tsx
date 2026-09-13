@@ -230,7 +230,7 @@ export default function Projects({
         tabIndex={0}
         role="group"
         aria-roledescription="carousel"
-        aria-label="Projects — use the arrow keys to turn the ring"
+        aria-label="Projects: use the arrow keys to turn the ring"
         onWheel={onWheel}
         onKeyDown={onKeyDown}
         onPointerEnter={() => (hovered.current = true)}
@@ -368,7 +368,7 @@ export default function Projects({
                 onClick={() => remember(active.id)}
                 className="font-body text-micro text-parchment inline-flex items-center gap-1 hover:gap-2 transition-all focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-container"
               >
-                Open codex entry
+                View project
                 <span aria-hidden="true">→</span>
               </Link>
             </motion.div>

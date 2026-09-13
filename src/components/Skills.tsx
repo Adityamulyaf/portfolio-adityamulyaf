@@ -353,7 +353,7 @@ export default function Skills() {
             Craft
           </span>
           <h2 className="font-display text-h2 italic text-text-primary">
-            The tools I reach for.
+            The spells I know.
           </h2>
         </div>
       </div>

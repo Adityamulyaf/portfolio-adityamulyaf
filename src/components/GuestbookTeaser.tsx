@@ -39,7 +39,7 @@ export default function GuestbookTeaser() {
           <p className="font-body text-small text-text-muted">Reading the wall…</p>
         ) : signatures.length === 0 ? (
           <p className="font-body text-small text-text-muted">
-            No statues carved yet — be the first.
+            No statues carved yet. Be the first.
           </p>
         ) : (
           signatures.map((sig) => <StatueTile key={sig.id} signature={sig} />)

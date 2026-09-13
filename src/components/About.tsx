@@ -46,9 +46,9 @@ export default function About({
   }, []);
 
   const specializations = [
-    "Software Architecture",
-    "Embedded Systems",
-    "UI/UX Design",
+    "Robotics & Autonomous Systems",
+    "AI & Computer Vision",
+    "Software Engineering"
   ];
 
   return (
@@ -61,22 +61,21 @@ export default function About({
           About
         </span>
         <h2 className="font-display text-h2 italic text-text-primary mb-lg">
-          Intentionality over domain.
+          A little magic, mostly engineering.
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-xl">
           {/* Main Description */}
           <div className="md:col-span-6 flex flex-col gap-md">
-            <p className="font-body text-lead font-light text-secondary-fixed-dim">
-              I am a builder who codes and designs across robotics, mobile, and
-              web. Currently pursuing Informatika at Universitas Sebelas Maret,
-              I believe that great engineering isn&apos;t just about the code—it&apos;s
-              about the purpose and physical nature of the solution.
+            <p className="font-body text-lead font-light text-secondary-fixed-dim text-justify">
+              I like making things, mostly with code, electronics, and whatever happens
+              to be lying around. Currently studying Informatics at Universitas Sebelas Maret,
+              I&apos;m usually somewhere between building, breaking, and figuring things out.
             </p>
-            <p className="font-body text-lead font-light text-secondary-fixed-dim">
-              Whether I&apos;m debugging a ROS node for an autonomous boat or
-              refining the padding of a React component, my goal is to create
-              systems that feel grounded, reliable, and expertly crafted.
+            <p className="font-body text-lead font-light text-secondary-fixed-dim text-justify">
+              I work with robotics, AI, embedded systems, and software, with a particular
+              interest in autonomous systems. I like trying weird ideas and seeing where they go.
+              Sometimes they work. Usually, they don&apos;t.
             </p>
           </div>
 
@@ -84,7 +83,7 @@ export default function About({
           <div className="md:col-span-3">
             <div className="relative overflow-hidden rounded-card bg-surface aspect-[3/4] w-full">
               <Image
-                src="/about_profile.png"
+                src="/about_profile.webp"
                 alt="Personal illustration of Firizqi Aditya Mulya"
                 fill
                 sizes="(max-width: 768px) 100vw, 33vw"
@@ -97,7 +96,7 @@ export default function About({
           <div className="md:col-span-3 flex flex-col gap-md">
             <div>
               <span className="font-body text-label text-text-muted block mb-xs">
-                Specializations
+                Things I work with
               </span>
               <div className="flex flex-col items-start gap-xs mt-xs">
                 {specializations.map((spec) => {

@@ -160,7 +160,7 @@ export function useSignatures(take: number) {
         } catch (error) {
           console.error("Firestore write failed, saving locally:", error);
           saveLocal(name, dataUrl, date);
-          return "Saved to this device only — the guestbook is offline right now.";
+          return "Saved to this device only. The guestbook is offline right now.";
         }
       }
 

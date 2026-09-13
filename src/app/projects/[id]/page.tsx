@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   if (!project) return { title: "Project not found" };
 
   return {
-    title: `${project.title} — Firizqi Aditya Mulya`,
+    title: `${project.title} | Firizqi Aditya Mulya`,
     description: project.details.overview,
   };
 }
@@ -52,12 +52,12 @@ export default async function ProjectPage({ params }: Params) {
 
           <header className="mt-md mb-xl">
             <Label>
-              {project.domain} · Codex
+              {project.domain} · Spellbook
             </Label>
             <h1 className="font-display text-h2 italic text-text-primary">
               {project.title}
             </h1>
-            <p className="font-body text-lead font-light text-secondary-fixed-dim mt-sm max-w-[58ch]">
+            <p className="font-body text-lead font-light text-secondary-fixed-dim mt-sm max-w-[58ch] text-justify">
               {project.description}
             </p>
 
@@ -84,27 +84,27 @@ export default async function ProjectPage({ params }: Params) {
           <div className="grid grid-cols-1 md:grid-cols-12 gap-xl">
             <section className="md:col-span-7">
               <Label>Overview</Label>
-              <p className="font-body text-lead font-light text-secondary-fixed-dim max-w-[62ch]">
+              <p className="font-body text-lead font-light text-secondary-fixed-dim max-w-[62ch] text-justify">
                 {details.overview}
               </p>
 
               <div className="mt-xl grid grid-cols-1 sm:grid-cols-2 gap-lg">
                 <div>
                   <Label>The challenge</Label>
-                  <p className="font-body text-small text-secondary-fixed-dim">
+                  <p className="font-body text-small text-secondary-fixed-dim text-justify">
                     {details.challenge}
                   </p>
                 </div>
                 <div>
                   <Label>The solution</Label>
-                  <p className="font-body text-small text-secondary-fixed-dim">
+                  <p className="font-body text-small text-secondary-fixed-dim text-justify">
                     {details.solution}
                   </p>
                 </div>
               </div>
             </section>
 
-            <aside className="md:col-span-4 md:col-start-9">
+            <aside className="md:col-span-4 md:col-start-9 self-start">
               <Label>Links</Label>
               <div className="flex flex-col items-start gap-sm">
                 <a
@@ -142,7 +142,7 @@ export default async function ProjectPage({ params }: Params) {
         </article>
       </main>
 
-      <Footer />
+      <Footer showContactIcons />
     </>
   );
 }

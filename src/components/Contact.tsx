@@ -6,6 +6,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import myStatue from "../../public/my-statue.png";
 import GuestbookTeaser from "./GuestbookTeaser";
+import { SocialIcon, ICON_PATHS } from "./SocialIcon";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -72,7 +73,7 @@ export default function Contact() {
               Connect
             </span>
             <h2 className="font-display text-h2 italic text-text-primary mb-xl">
-              Let&apos;s build something.
+              Let&apos;s make some magic.
             </h2>
           </div>
 
@@ -82,8 +83,11 @@ export default function Contact() {
               <span className="font-body text-label text-text-muted block mb-xs">
                 Email
               </span>
-              <span className="font-body text-lead font-medium text-primary-container link-hover">
-                adityamulyaf@gmail.com
+              <span className="flex items-center gap-xs">
+                <SocialIcon path={ICON_PATHS.email} />
+                <span className="font-body text-lead font-medium text-primary-container link-hover">
+                  adityamulyaf@gmail.com
+                </span>
               </span>
             </a>
 
@@ -97,8 +101,11 @@ export default function Contact() {
               <span className="font-body text-label text-text-muted block mb-xs">
                 LinkedIn
               </span>
-              <span className="font-body text-lead font-medium text-primary-container link-hover">
-                Firizqi Aditya Mulya
+              <span className="flex items-center gap-xs">
+                <SocialIcon path={ICON_PATHS.linkedin} />
+                <span className="font-body text-lead font-medium text-primary-container link-hover">
+                  Firizqi Aditya Mulya
+                </span>
               </span>
             </a>
 
@@ -112,8 +119,29 @@ export default function Contact() {
               <span className="font-body text-label text-text-muted block mb-xs">
                 GitHub
               </span>
-              <span className="font-body text-lead font-medium text-primary-container link-hover">
-                @adityamulyaf
+              <span className="flex items-center gap-xs">
+                <SocialIcon path={ICON_PATHS.github} />
+                <span className="font-body text-lead font-medium text-primary-container link-hover">
+                  @adityamulyaf
+                </span>
+              </span>
+            </a>
+
+            {/* Instagram Link */}
+            <a
+              href="https://instagram.com/adityamulyaf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group"
+            >
+              <span className="font-body text-label text-text-muted block mb-xs">
+                Instagram
+              </span>
+              <span className="flex items-center gap-xs">
+                <SocialIcon path={ICON_PATHS.instagram} />
+                <span className="font-body text-lead font-medium text-primary-container link-hover">
+                  @adityamulyaf
+                </span>
               </span>
             </a>
           </div>

@@ -52,7 +52,7 @@ export default function GuestbookPage() {
               <p className="font-body text-small text-text-muted">Reading the wall…</p>
             ) : signatures.length === 0 ? (
               <p className="font-body text-small text-text-muted">
-                No statues carved yet — be the first.
+                No statues carved yet. Be the first.
               </p>
             ) : (
               <>
@@ -79,7 +79,7 @@ export default function GuestbookPage() {
         </div>
       </main>
 
-      <Footer />
+      <Footer showContactIcons />
 
       <CarveModal
         open={carving}
