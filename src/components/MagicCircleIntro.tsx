@@ -197,13 +197,13 @@ export default function MagicCircleIntro({ onComplete }: MagicCircleIntroProps) 
       {readyToInteract ? (
         <button
           ref={buttonRef}
-          // pointerdown fires before click — on touch devices click only
-          // arrives after touchstart -> touchend, so starting here shaves
-          // that gap off the time before resume()/start() get called. click
-          // stays wired for keyboard activation (Enter/Space), where no
-          // pointer event fires at all; startIntro's startedRef guard makes
-          // firing both harmless.
-          onPointerDown={startIntro}
+          // click only: pointerdown/touchstart looked like a free latency win,
+          // but iOS Safari (and some other mobile browsers) don't reliably
+          // treat that event as a valid gesture for unlocking Web Audio.
+          // run() only ever fires once, so when pointerdown's resume() call
+          // was silently ignored there, the click that followed — the one
+          // that *would* have worked — got skipped as an already-started
+          // intro. The animation still played, just silently.
           onClick={startIntro}
           className="z-20 font-display italic text-h2 text-primary tracking-[0.08em] transition-all duration-300 relative pulsing-text px-lg py-md focus:outline-none cursor-pointer hover:scale-105 active:scale-95"
         >
