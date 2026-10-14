@@ -6,7 +6,8 @@ import gsap from "gsap";
 export default function Hero({ active = true }: { active?: boolean }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLAnchorElement>(null);
-  const arrowRef = useRef<HTMLSpanElement>(null);
+  const cvButtonRef = useRef<HTMLAnchorElement>(null);
+  const cvIconRef = useRef<SVGSVGElement>(null);
 
   useEffect(() => {
     if (active && containerRef.current) {
@@ -28,7 +29,6 @@ export default function Hero({ active = true }: { active?: boolean }) {
 
   useEffect(() => {
     const button = buttonRef.current;
-    const arrow = arrowRef.current;
     if (!button) return;
 
     const handleMouseMove = (e: MouseEvent) => {
@@ -36,9 +36,7 @@ export default function Hero({ active = true }: { active?: boolean }) {
       const x = e.clientX - rect.left - rect.width / 2;
       const y = e.clientY - rect.top - rect.height / 2;
 
-      // Magnetic pull strength: button shifts 35%, arrow shifts 70% of cursor distance
-      const buttonStrength = 0.35;
-      const arrowStrength = 0.7;
+      const buttonStrength = 0.25;
 
       gsap.to(button, {
         x: x * buttonStrength,
@@ -46,15 +44,6 @@ export default function Hero({ active = true }: { active?: boolean }) {
         duration: 0.3,
         ease: "power2.out",
       });
-
-      if (arrow) {
-        gsap.to(arrow, {
-          x: x * arrowStrength,
-          y: y * arrowStrength,
-          duration: 0.35,
-          ease: "power2.out",
-        });
-      }
     };
 
     const handleMouseLeave = () => {
@@ -65,15 +54,6 @@ export default function Hero({ active = true }: { active?: boolean }) {
         duration: 0.6,
         ease: "elastic.out(1, 0.3)",
       });
-
-      if (arrow) {
-        gsap.to(arrow, {
-          x: 0,
-          y: 0,
-          duration: 0.6,
-          ease: "elastic.out(1, 0.3)",
-        });
-      }
     };
 
     button.addEventListener("mousemove", handleMouseMove);
@@ -82,6 +62,63 @@ export default function Hero({ active = true }: { active?: boolean }) {
     return () => {
       button.removeEventListener("mousemove", handleMouseMove);
       button.removeEventListener("mouseleave", handleMouseLeave);
+    };
+  }, []);
+
+  useEffect(() => {
+    const cvButton = cvButtonRef.current;
+    const cvIcon = cvIconRef.current;
+    if (!cvButton) return;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const rect = cvButton.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+
+      const buttonStrength = 0.25;
+      const iconStrength = 0.5;
+
+      gsap.to(cvButton, {
+        x: x * buttonStrength,
+        y: y * buttonStrength,
+        duration: 0.3,
+        ease: "power2.out",
+      });
+
+      if (cvIcon) {
+        gsap.to(cvIcon, {
+          x: x * iconStrength,
+          y: y * iconStrength,
+          duration: 0.35,
+          ease: "power2.out",
+        });
+      }
+    };
+
+    const handleMouseLeave = () => {
+      gsap.to(cvButton, {
+        x: 0,
+        y: 0,
+        duration: 0.6,
+        ease: "elastic.out(1, 0.3)",
+      });
+
+      if (cvIcon) {
+        gsap.to(cvIcon, {
+          x: 0,
+          y: 0,
+          duration: 0.6,
+          ease: "elastic.out(1, 0.3)",
+        });
+      }
+    };
+
+    cvButton.addEventListener("mousemove", handleMouseMove);
+    cvButton.addEventListener("mouseleave", handleMouseLeave);
+
+    return () => {
+      cvButton.removeEventListener("mousemove", handleMouseMove);
+      cvButton.removeEventListener("mouseleave", handleMouseLeave);
     };
   }, []);
 
@@ -99,21 +136,40 @@ export default function Hero({ active = true }: { active?: boolean }) {
         </p>
 
         {/* Call to action */}
-        <div className="gsap-hero-item opacity-0">
+        <div className="gsap-hero-item opacity-0 flex flex-wrap items-center gap-md">
           <a
             ref={buttonRef}
             href="#projects"
-            className="font-body text-small font-medium text-primary-container hover:text-accent-hover transition-colors inline-flex items-center gap-xs link-hover group"
+            className="font-body text-small font-medium text-[#FAEAD0] bg-primary-container hover:bg-accent-hover hover:text-white rounded-full px-5 py-2.5 transition-all duration-300 inline-flex items-center shadow-sm hover:shadow-md cursor-pointer"
             style={{ display: "inline-flex" }}
           >
-            <span>See my work</span>{" "}
-            <span
-              ref={arrowRef}
-              className="font-normal text-[22px] inline-block"
-              style={{ display: "inline-block" }}
+            <span>See my work</span>
+          </a>
+
+          <a
+            ref={cvButtonRef}
+            href="/cv/Firizqi%20Aditya%20Mulya%20-%20CV.pdf"
+            download="Firizqi Aditya Mulya - CV.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-body text-small font-medium text-primary-container hover:text-white bg-primary-container/10 hover:bg-primary-container border border-primary-container/25 hover:border-transparent rounded-full px-5 py-2.5 transition-all duration-300 inline-flex items-center gap-2 group shadow-sm hover:shadow cursor-pointer"
+            style={{ display: "inline-flex" }}
+          >
+            <svg
+              ref={cvIconRef}
+              className="w-4 h-4 transition-transform group-hover:translate-y-0.5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth="2"
             >
-              →
-            </span>
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+              />
+            </svg>
+            <span>Download CV</span>
           </a>
         </div>
       </div>

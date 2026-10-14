@@ -106,6 +106,29 @@ export default function Navbar() {
             >
               Guestbook
             </Link>
+            <a
+              href="/cv/Firizqi%20Aditya%20Mulya%20-%20CV.pdf"
+              download="Firizqi Aditya Mulya - CV.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Download CV"
+              className="font-body text-small font-medium text-primary-container hover:text-white bg-primary-container/10 hover:bg-primary-container border border-primary-container/20 hover:border-transparent rounded-full px-3 py-1.5 transition-all duration-200 flex items-center gap-1.5 ml-1"
+            >
+              <svg
+                className="w-3.5 h-3.5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                />
+              </svg>
+              <span>CV</span>
+            </a>
           </div>
 
           <button
@@ -147,6 +170,29 @@ export default function Navbar() {
           >
             Guestbook
           </Link>
+          <a
+            href="/cv/Firizqi%20Aditya%20Mulya%20-%20CV.pdf"
+            download="Firizqi Aditya Mulya - CV.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={toggleMobileMenu}
+            className="font-display text-h2 italic text-secondary hover:text-primary transition-colors flex items-center gap-3 mt-2"
+          >
+            <span>Download CV</span>
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+              />
+            </svg>
+          </a>
         </div>
       </div>
     </>

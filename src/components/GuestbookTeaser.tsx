@@ -30,7 +30,7 @@ export default function GuestbookTeaser() {
           href="/guestbook"
           className="font-body text-label font-medium text-primary-container hover:text-accent-hover border border-primary-container/25 hover:border-accent-hover rounded-md px-sm py-xs transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-container"
         >
-          Sign the guestbook →
+          Sign the guestbook
         </Link>
       </div>
 

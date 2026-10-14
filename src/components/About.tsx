@@ -127,6 +127,33 @@ export default function About({
                 Surakarta, ID
               </p>
             </div>
+            <div>
+              <span className="font-body text-label text-text-muted block mb-xs">
+                Curriculum Vitae
+              </span>
+              <a
+                href="/cv/Firizqi%20Aditya%20Mulya%20-%20CV.pdf"
+                download="Firizqi Aditya Mulya - CV.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-body text-small font-medium text-primary-container hover:text-accent-hover inline-flex items-center gap-1.5 link-hover group"
+              >
+                <span>Download CV</span>
+                <svg
+                  className="w-3.5 h-3.5 transition-transform group-hover:translate-y-0.5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                  />
+                </svg>
+              </a>
+            </div>
           </div>
         </div>
       </div>

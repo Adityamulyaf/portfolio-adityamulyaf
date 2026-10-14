@@ -366,10 +366,9 @@ export default function Projects({
               <Link
                 href={`/projects/${active.id}`}
                 onClick={() => remember(active.id)}
-                className="font-body text-micro text-parchment inline-flex items-center gap-1 hover:gap-2 transition-all focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-container"
+                className="font-body text-micro text-parchment inline-flex items-center hover:underline underline-offset-2 transition-all focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-container"
               >
                 View project
-                <span aria-hidden="true">→</span>
               </Link>
             </motion.div>
           )}
